@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace = "~{/fragments/head :: head}"></head>
+
+    <body style="background-image: url('/image/informacionUsuario.jpg'); background-size: cover; background-position: bottom; background-repeat: no-repeat">
+        <header class="contenedor-header-formulario">
+            <nav th:replace = "~{/fragments/navbar :: nav}"></nav>
+        </header>
+            <main class="container mt-5" style='padding-top: 10rem'>
+
+                <div class='row justify-content-center'>
+
+                    <div class="bodyForm-registrar" style="width: 60%; border: 2px double black">
+                        <div th:replace = "~{/fragments/modelo :: div}"></div>
+
+                        <h2 class="text-center mb-5">Perfil Usuario</h2>
+
+                        <form class="form-group" th:action="@{/usuario/modificar}" th:object="${usuario}" method="POST" enctype="multipart/form-data">
+
+                            <input type="hidden" th:field="*{id_usuario}" name="id_usuario">
+                            <input type="hidden" th:field="*{password}" name="password">
+                            <input type="hidden" th:field="*{rol}" sec:authorize="!hasAnyRole('ADMIN')"/>
+                            <input type="hidden" th:field="*{estado}" sec:authorize="!hasAnyRole('ADMIN')"/>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nombre" class="form-label">Ingresa tu nombre</label>
+                                    <input type="text" class="form-control" placeholder="Nombre" id="nombre" th:field="*{nombre}" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="apellido" class="form-label">Ingresa tu apellido</label>
+                                    <input type="text" class="form-control" placeholder="Apellido" id="apellido" th:field="*{apellido}" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="dni" class="form-label">Ingresa tu DNI</label>
+                                    <input type="number" class="form-control" placeholder="Número de Documento" id="dni" th:field="*{dni}" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="celular" class="form-label">Ingresa tu teléfono</label>
+                                    <input type="number" class="form-control" placeholder="Teléfono" id="celular" th:field="*{celular}" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="fecha_nac" class="form-label">Ingresa tu fecha de nacimiento</label>
+                                    <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha_nac" th:field="*{fecha_nac}" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nacionalidad" class="form-label">Ingrese su nacionalidad</label>
+                                    <input type="text" class="form-control" placeholder="Nacionalidad" id="nacionalidad" th:field="*{nacionalidad}" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="direccion" class="form-label">Ingresa tu dirección</label>
+                                    <input type="text" class="form-control" placeholder="Dirección" id="direccion" th:field="*{direccion}" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Ingresa tu E-mail</label>
+                                    <input type="email" class="form-control" placeholder="E-mail" id="email" th:field="*{email}" />
+                                </div>
+                            </div>
+                            <div class="row mb-3" sec:authorize="hasAnyRole('ROLE_VENDEDOR','ROLE_ADMIN')">
+                                <div class="col-md-6">
+                                    <label for="cargo" class="form-label">Ingresa tu cargo</label>
+                                    <input type="text" class="form-control" placeholder="Cargo" id="cargo" th:field="*{cargo}" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="sueldo" class="form-label">Ingresa tu sueldo</label>
+                                    <input type="text" class="form-control" placeholder="Sueldo" id="sueldo" th:field="*{sueldo}" />
+                                </div>
+                            </div>
+                            <div class="row mb-3" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                                <div class="col-md-6">
+                                    <label for="exampleInputPassword1" class="form-label">Rol</label>
+                                    <select name="rol" id="selectRol" class='form-select' th:field="*{rol}">
+                                        <option value="">Seleccionar rol</option>
+                                        <option th:each="rolAelegir : ${roles}"
+                                                th:value="${rolAelegir}"
+                                                th:selected="${usuario.rol == rolAelegir}"
+                                                th:text="${rolAelegir}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="check-estado" style="width: 60%">
+                                        <label for="estado">El Usuario está dado de <span th:text="${usuario.estado ? 'Alta' : 'Baja'}"></span></label><br>
+                                        <input type="checkbox" id="estado" class="mi-check" th:field="*{estado}" />
+                                        <span>Modificar Estado</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                                <div>
+                                    <button type="submit" class="btn"  style="
+                                            background: #c17108;
+                                            padding: 0.3rem 2rem;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            color: white;
+                                            margin-top: 1rem;
+                                            border: 2px solid #d51a1af1;
+                                            border-radius: 10px;">Actualizar</button>
+                                </div>
+                                <div>
+                                    <a th:href="@{/}" class="btn" style="background: black; margin: 2rem auto; color: white;text-decoration: none; padding: .3rem; font-size: 1.2rem">Volver</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        <footer th:replace = "/fragments/footer2 :: footer"></footer>
+    </body>
+</html>
+
+

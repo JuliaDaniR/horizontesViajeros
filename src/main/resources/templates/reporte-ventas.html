@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="~{/fragments/head :: head}"></head>
+    <body>
+        <header class="contenedor-header">
+            <nav th:replace="/fragments/navbar :: nav"></nav>
+            <div th:replace="/fragments/modelo :: div"></div>
+        </header>
+        <div class="contenedor-header-servicio" style="padding-top: 10rem; background-image: url('https://i.pinimg.com/originals/96/1e/7b/961e7b5ab22f51655970cc4e7bf2bd07.jpg')">
+            <div class="container-reporte-tabla">
+                <h1>Reporte de Ventas</h1>
+                <table id="tablaVentas" class="tabla" style="border: 3px solid black;">
+                    <thead>
+                        <tr>
+                            <th>Vendedor</th>
+                            <th>Fecha</th>
+                            <th>Medio de Pago</th>
+                            <th>Monto Venta</th>
+                            <th>Comisión</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="venta : ${ventasTabla}">
+                            <td>
+                                <span th:each="usuario, iterStat : ${venta.usuario}">
+                                    <span th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></span>
+                                    <span th:if="${!iterStat.last}" style="display: block;"></span>
+                                </span>
+                            </td>
+                            <td th:text="${venta.fecha_venta}"></td>
+                            <td th:text="${venta.medio_pago}"></td>
+                            <td th:text="${venta.precioTotalVenta}"></td>
+                            <td th:text="${venta.comision}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form class="container-checkbox-filtro" id="filtersForm" method="post" th:action="@{/usuario/reporte/__${session.usuariosession.id_usuario}__}">
+                <div>
+                    <label for="fechaInicio">Fecha de inicio:</label>
+                    <input type="date" id="fechaInicio" name="fechaInicio">
+                </div>
+                <div>
+                    <label for="fechaFin">Fecha de fin:</label>
+                    <input type="date" id="fechaFin" name="fechaFin">
+                </div>
+                <div>
+                    <label for="metodoPago">Metodo pago</label>
+                    <input type="checkbox" id="metodoPago"><!-- cuando se haga checked se abre  -->
+                    <div class="filtroMetodoPago" style="display: none"><!--este div  -->
+                        <label for="medioPago">Medio de Pago:</label>
+                        <select name="medioPago" id="medioPago">
+                            <option value="Todos">Todos</option>
+                            <option value="Tarjeta">Tarjeta de Crédito</option>
+                            <option value="TarjetaDebito">Tarjeta de Débito</option>
+                            <option value="Transferencia">Transferencia Bancaria</option>
+                            <option value="Efectivo">Pago en Efectivo</option>
+                            <option value="monederoVirtual">Monedero Virtual</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="container-btn-filtro" style="justify-items: end; width: 100%">
+                    <button type="submit" style="margin-right: 2rem; background-color: #0d4645; color: whitesmoke" onclick="applyFilters()">Buscar</button> 
+                    <button type="button" style="margin-right: 2rem; background-color: #d51a1af1; color: whitesmoke" onclick="limpiarFiltros()">Limpiar Filtro</button>
+                </div>
+            </form>
+            <div class="container-checkbox-filtro" style="display: flex; width: 50%">
+                <div>
+                    <label for="diario">Reporte Diario</label>
+                    <input type="checkbox" id="diario">
+                </div>
+                <div>
+                    <label for="mensual">Reporte Mensual</label>
+                    <input type="checkbox" id="mensual">
+                </div>
+                <div>
+                    <label for="anual">Reporte Anual</label>
+                    <input type="checkbox" id="anual">
+                </div>
+            </div>
+            <section class="tablaDiaria" style="display: none">
+                <div class="container-reporte-tabla">
+                    <h2>Diario</h2>
+                    <h3 style="text-align: center !important" th:text="'El Vendedor con más ventas fue:' + ' ' + ${mejorVendedor.nombre} + ' ' + ${mejorVendedor.apellido}"></h3>
+                    <table class="tabla" style="border: 3px solid black">
+                        <thead>
+                            <tr>
+                                <th>Fecha venta</th>
+                                <th>Cantidad de ventas</th>
+                                <th>Costo total ventas</th>
+                                <th>Comisiones a pagar</th>
+                                <th>Ganancias Diaria</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="reporte : ${reporteDiarioList}">
+                                <td th:text="${reporte.fechaVenta}"></td>
+                                <td th:text="${reporte.cantidadVentas}"></td>
+                                <td th:text="${reporte.costoTotalVentas}"></td>
+                                <td th:text="${reporte.comisionesAPagar}"></td>
+                                <td th:text="${reporte.gananciasDiarias}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="tablaMensual container-reporte-tabla" style="display: none">
+                <div class="container-reporte-tabla">
+                    <h2>Mensual</h2>
+                    <h3 style="text-align: center !important" th:text="'El Vendedor con más ventas fue:' + ' ' + ${mejorVendedor.nombre} + ' ' + ${mejorVendedor.apellido}"></h3>
+                    <table class="tabla" style="border: 3px solid black">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Cantidad de ventas</th>
+                                <th>Costo total ventas</th>
+                                <th>Comisiones a pagar</th>
+                                <th>Ganancias Mensual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="reporte : ${reporteMensualList}">
+                                <td th:text="${reporte.mes}"></td>
+                                <td th:text="${reporte.cantidadVentas}"></td>
+                                <td th:text="${reporte.costoTotalVentas}"></td>
+                                <td th:text="${reporte.comisionesAPagar}"></td>
+                                <td th:text="${reporte.gananciasMensuales}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="tablaAnual container-reporte-tabla" style="display: none">
+                <div class="container-reporte-tabla">
+                    <h2>Anual</h2>
+                    <h3 style="text-align: center !important" th:text="'El Vendedor con más ventas fue:' + ' ' + ${mejorVendedor.nombre} + ' ' + ${mejorVendedor.apellido}"></h3>
+                    <table class="tabla" style="border: 3px solid black">
+                        <thead>
+                            <tr>
+                                <th>Año</th>
+                                <th>Cantidad de ventas</th>
+                                <th>Costo total ventas</th>
+                                <th>Comisiones a pagar</th>
+                                <th>Ganancias Anual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="reporteAnual : ${reporteAnualList}">
+                                <td th:text="${reporteAnual.anio}"></td>
+                                <td th:text="${reporteAnual.cantidadVentas}"></td>
+                                <td th:text="${reporteAnual.costoTotalVentas}"></td>
+                                <td th:text="${reporteAnual.comisionesAPagar}"></td>
+                                <td th:text="${reporteAnual.gananciasAnuales}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        <footer th:replace = "~{/fragments/footer2 :: footer}"></footer>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const metodoPagoCheckbox = document.getElementById('metodoPago');
+                const filtroMetodoPago = document.querySelector('.filtroMetodoPago');
+                metodoPagoCheckbox.addEventListener('change', function () {
+                    filtroMetodoPago.style.display = metodoPagoCheckbox.checked ? 'block' : 'none';
+                });
+
+                const diarioCheckbox = document.getElementById('diario');
+                const tablaDiaria = document.querySelector('.tablaDiaria');
+                diarioCheckbox.addEventListener('change', function () {
+                    tablaDiaria.style.display = diarioCheckbox.checked ? 'block' : 'none';
+                });
+
+                const mensualCheckbox = document.getElementById('mensual');
+                const tablaMensual = document.querySelector('.tablaMensual');
+                mensualCheckbox.addEventListener('change', function () {
+                    tablaMensual.style.display = mensualCheckbox.checked ? 'block' : 'none';
+                });
+
+                const anualCheckbox = document.getElementById('anual');
+                const tablaAnual = document.querySelector('.tablaAnual');
+                anualCheckbox.addEventListener('change', function () {
+                    tablaAnual.style.display = anualCheckbox.checked ? 'block' : 'none';
+                });
+            });
+        </script>
+    </body>
+</html>

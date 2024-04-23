@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace = "~{/fragments/head :: head}"></head>
+
+    <body id="estilo-carrito" style="background-image: url('https://images.vexels.com/media/users/3/126387/raw/e7d9701e05bf5fcb3d0b8dbb33af37b4-fondo-plano-del-marco-plano-de-viaje.jpg');background-size: cover;background-repeat: no-repeat;background-position: center">
+        <header class="contenedor-header-formulario">
+            <nav th:replace = "~{/fragments/navbar :: nav}"></nav>
+        </header>
+        <div class="container-carrito">
+            <div class="container-detalle-servicio">
+                <div>
+                    <img th:src="${servicio.imagenes[0].url}" alt="Imagen del servicio" />
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <button class="boton-contador boton-menos" onclick="decrementarContador()">-</button>
+                        <p style="margin:0 1rem ; font-size: 1.3rem" id="contador"></p>
+                        <button class="boton-contador boton-mas" onclick="incrementarContador()">+</button>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction: column">
+                    <h3 th:text="${servicio.nombre}" style="border-bottom: 1px solid gray"></h3>
+                    <h4 th:text="${servicio.pais_destino}"></h4>
+                    <h5 th:text="${servicio.destino_servicio}"></h5>
+                    <h5 class="costoServicio" th:text="'$ ' +${servicio.costo_servicio}"></h5>
+                    <p>
+                        <i class="fas fa-exclamation-triangle" style="color: orange;"></i> <!-- Icono de advertencia -->
+                        <span th:text="${detalleProducto}"></span> <!-- Mensaje -->
+                    </p>
+                </div>
+            </div>
+            <div class="container-pedido-principal">
+                <div class="container-pedido" th:each="item : ${session.carrito}">
+                    <h2 style="text-align: center; border-bottom: 1px solid black; color: #c85f0a;padding: 1rem">Servicios agregados</h2>
+                    <div>
+                        <h3 th:text="${item.nombre}"></h3>
+                        <p>Cantidad: <span th:text="${item.cantidad}"></span></p>
+                        <p>Precio: $<span th:text="${item.costo_servicio}"></span></p>
+                        <!-- Agregar un formulario para eliminar del carrito -->
+                        <form th:action="@{/venta/eliminarDelCarrito}" method="post">
+                            <input type="hidden" name="servicioId" th:value="${item.codigo_servicio}">
+                            <button type="submit">Eliminar del carrito</button>
+                        </form>
+                    </div>
+                </div>
+                <div class='container-resumen-compra' style="border: 2px solid grey; padding: .5rem; margin: 2rem">
+                    <h3 style="text-align: center; border-bottom: 1px solid black; color: #0d4645;padding: 1rem">Resumen de compra</h3>
+                    <div class='container-resumen-compra-div'  style="display: flex; justify-content: space-between">
+                        <h4>Subtotal</h4>
+                        <h3 class="subtotal-span" th:text="${subtotal}"></h3>
+                        <h4>Descuento</h4>
+                        <h3 class="descuento-span" th:text="${descuento}"></h3>
+                    </div>
+                    <div style="display: flex; justify-content: space-between">
+                        <h4>Total</h4>
+                        <h3 class="total-span" th:text="${total}"></h3>
+                    </div>
+                    <form th:action="@{/venta/agregarAlCarrito}" method="post">
+                        <!-- Aquí podrías tener un campo oculto para enviar el ID del servicio -->
+                        <input type="hidden" name="servicioId" th:value="${servicio.codigo_servicio}">
+                        <input type="hidden" name="cantidadStr" id="cantidad" th:value="${contador}">
+                        <input type="hidden" name="id_empleado" th:value="${servicio.vendedor.id_usuario}">
+                        <input type="hidden" name="id_cliente" th:value="${logueado.id_usuario}">
+                        <input type="hidden" name="subtotal" id="subtotal" th:value="${subtotal}">
+
+                        <button type="submit" style="background: #e86c07d3;border: 2px solid #e86c07d3" class="boton">Agregar al carrito</button>
+                    </form>
+                </div>    
+            </div>
+        </div>
+        <div class="btn-volver" style="width: 100% ; align-items: center">
+            <a th:href="@{/}" style="background: black; color: white; padding: .4rem; font-size: 1.2rem">Salir</a>
+        </div>
+        <script>
+            var contador = 0; // Variable global para el contador
+
+            // Función para incrementar el contador
+            function incrementarContador() {
+                contador++;
+                actualizarContador();
+            }
+
+            // Función para decrementar el contador y evitar números negativos
+            function decrementarContador() {
+                if (contador > 0) { // Verificar que el contador no sea menor que cero
+                    contador--;
+                    actualizarContador();
+                }
+            }
+
+            // Función para actualizar el contador en la interfaz y en el campo cantidad
+            function actualizarContador() {
+                var contadorElemento = document.getElementById("contador");
+                contadorElemento.innerText = contador;
+                document.getElementById("cantidad").value = contador; // Actualizar el valor del campo cantidad
+                calcularTotal();
+            }
+      function calcularTotal() {
+    var costoServicios = document.querySelectorAll('.costoServicio'); // Obtener todos los elementos que muestran el costo del servicio
+    var subtotal = 0;
+
+    costoServicios.forEach(function (item) {
+        var precio = parseFloat(item.innerText.replace('$', '')); // Obtener el precio del servicio
+        var cantidad = parseInt(document.getElementById("cantidad").value); // Obtener la cantidad del servicio
+
+        subtotal += cantidad * precio; // Calcular el subtotal sumando cantidad * precio
+    });
+    
+     // Aplicar descuento del 10% si hay más de un servicio en el carrito
+    if (costoServicios.length > 1) {
+        descuento = subtotal * 0.10; // 10% de descuento
+    }
+
+    var descuento = 0; // Puedes calcular el descuento según tus reglas de negocio
+
+    var total = subtotal - descuento; // Calcular el total restando el descuento
+
+    document.querySelector('.subtotal-span').innerText = '$' + subtotal.toFixed(2); // Actualizar el subtotal en la interfaz con el signo de la moneda
+    document.querySelector('.descuento-span').innerText = '$' + descuento.toFixed(2); // Actualizar el descuento en la interfaz con el signo de la moneda
+    document.querySelector('.total-span').innerText = '$' + total.toFixed(2); // Actualizar el total en la interfaz con el signo de la moneda
+}
+
+            // Llamar a actualizarContador al cargar la página para sincronizar el contador y el campo cantidad
+            window.onload = function () {
+                actualizarContador();
+            };
+
+        </script>
+    </body>
+</html>

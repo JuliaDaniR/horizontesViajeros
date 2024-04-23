@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace = "~{/fragments/head :: head}"></head>
+    <body>
+        <nav th:replace = "~{/fragments/navbar :: nav}"></nav>
+        <div  id="service" class="contenedor-header-servicio">  
+            <div class="contenedor-servicio row">
+                <section class="row">
+                    <h1>Listado de Usuarios</h1>
+                    <table class="tabla" style="border: 1px solid white">
+                        <thead>
+                            <tr>
+                                <th>Nombre completo</th>
+                                <th>Telefono</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Direccion</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Cargo</th>
+                                <th>Sueldo</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="usuario : ${usuarios}">
+                            <tr th:if="${usuario.estado}">
+                                <td th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></td>
+                                <td th:text="${usuario.celular}"></td>
+                                <td th:text="${usuario.fecha_nac}"></td>   
+                                <td th:text="${usuario.direccion}"></td>
+                                <td class="hoverable" style="cursor: pointer">
+                                    <div class="emailUsuario" style="display: none;">
+                                        <p th:text="${usuario.email}"></p>
+                                    </div>
+                                    <span><i class="fas fa-envelope"></i></span>
+                                </td>
+                                <td th:text="${usuario.rol}"></td>
+                                <td th:text="${usuario.cargo}"></td>
+                                <td th:text="${usuario.sueldo}"></td>
+                                <td style="text-align: center">
+                                    <a
+                                        class="modificar"
+                                        th:href="@{/usuario/modificar/__${usuario.id_usuario}__}"
+                                        ><i class="fas fa-feather-alt"></i></a
+                                    >
+                                </td>
+                                <td  style="text-align: center">
+                                    <a
+                                        class="eliminar"
+                                        th:href="@{/usuario/eliminar/__${usuario.id_usuario}__}"
+                                        ><i class="fas fa-trash"></i></a
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="row">
+                    <h1>Usuarios a Dar de Alta</h1>
+                    <table class="tabla" style="border: 1px solid white">
+                        <thead>
+                            <tr>
+                                <th>Nombre completo</th>
+                                <th>Telefono</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Direccion</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Cargo</th>
+                                <th>Sueldo</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="usuario : ${usuarios}">
+                            <tr th:if="${!usuario.estado}">
+                                <td th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></td>
+                                <td th:text="${usuario.celular}"></td>
+                                <td th:text="${usuario.fecha_nac}"></td>   
+                                <td th:text="${usuario.direccion}"></td>
+                                <td class="hoverable" style="cursor: pointer">
+                                    <div class="emailUsuario" style="display: none;">
+                                        <p th:text="${usuario.email}"></p>
+                                    </div>
+                                    <span><i class="fas fa-envelope"></i></span>
+                                </td>
+                                <td th:text="${usuario.rol}"></td>
+                                <td th:text="${usuario.cargo}"></td>
+                                <td th:text="${usuario.sueldo}"></td>
+                                <td style="text-align: center">
+                                    <a
+                                        class="modificar"
+                                        th:href="@{/usuario/modificar/__${usuario.id_usuario}__}"
+                                        ><i class="fas fa-feather-alt"></i></a
+                                    >
+                                </td>
+                                <td  style="text-align: center">
+                                    <a
+                                        class="eliminar"
+                                        th:href="@{/usuario/eliminar/__${usuario.id_usuario}__}"
+                                        ><i class="fas fa-trash"></i></a
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+             <div class="btn-volver" style="width: 100% ;display: flex; align-items: center; justify-content: center">
+                <a th:href="@{/usuario/registrar}" class="botonLink">Agregar Usuario</a>
+                <a th:href="@{/}" style="background: darkgray ; margin: 3rem auto; ">Volver</a>
+            </div>
+        </div>
+         <footer th:replace = "~{/fragments/footer2 :: footer}"></footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.hoverable').hover(function () {
+                    $(this).find('.emailUsuario').fadeIn();
+                }, function () {
+                    $(this).find('.emailUsuario').fadeOut();
+                });
+            });
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace = "~{/fragments/head :: head}"></head>
+
+    <body>
+        <nav th:replace = "~{/fragments/navbar :: nav}"></nav>
+        <div  id="service" class="contenedor-header-servicio"> 
+            <section class="contenedor-servicio row">
+                <div class="container-todo-filtro">
+                    <div>
+                        <div class="container-btn-filtro">
+                            <button onclick="VerOpcionesFiltrado()">Filtros</button>
+                        </div>
+                        <form id="filtrosForm" style="display: none;" method="get" th:action="@{/servicio/listar/__${session.usuariosession.id_usuario}__}">
+                            <div class="container-checkbox-filtro">
+                                <div>
+                                    <label for="tipoServicio">Tipo Servicio</label>
+                                    <input type="checkbox" id="tipoServicio">
+                                </div>
+                                <div>
+                                    <label for="paises">Pais</label>
+                                    <input type="checkbox" id="paises">
+                                </div>
+                                <div>
+                                    <label for="masVendidos">Más Vendidos:</label>
+                                    <input type="checkbox" id="masVendidos" onchange="handleCheckboxChange('masVendidos')">
+                                </div>
+                                <div>
+                                    <label for="masPopulares">Más Populares:</label>
+                                    <input type="checkbox" id="masPopulares" onchange="handleCheckboxChange('masPopulares')">
+                                </div>
+                                <input type="hidden" id="ordenMasVendidos" name="ordenCantidad" value="">
+                                <input type="hidden" id="ordenMasPopulares" name="ordenVisitas" value="">
+                            </div>
+                            <div class="container-filtro">
+                                <div class="filtroTipoSercicio" style="display: none">
+                                    <label for="tipoServicio">Tipo Servicio</label>
+                                    <select name="tipoServicio" id="selectTipoServicio" th:field="${servicio.tipoServicio}">
+                                        <option value="">Todos</option>
+                                        <option th:each="tipo : ${tipos}" 
+                                                th:value="${tipo}" 
+                                                th:text="${tipo.descripcion}" 
+                                                th:selected="${servicio.tipoServicio != null and servicio.tipoServicio == tipo}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="filtroPais" style="display: none">
+                                    <label for="pais_destino">País del destino:</label>
+                                    <select class="form-control" id="pais_destino" name="pais_destino">
+                                        <option value=''>Seleccionar pais</option>
+                                        <option th:each="pais : ${paises}" th:value="${pais}" th:text="${pais}" style="color: black"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container-btn-filtro">
+                                <button type="button" style="margin-left: 2rem; background-color: #0d4645; color: whitesmoke" onclick="applyFilters()">Buscar</button> 
+                                <button type="button" style="margin-left: 2rem; background-color: #d51a1af1; color: whitesmoke" onclick="limpiarFiltros()">Limpiar Filtro</button>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+                <div id="inicial">
+                    <h1>Listado de Servicios</h1>
+                    <table class="tabla" style="border: 1px solid white">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Destino</th>
+                                <th>Fecha del servicio</th>
+                                <th>Costo</th>
+                                <th>Vendedor</th>
+                                <th>Tipo de Servicio</th>
+                                <th style="display: none;">Visitas</th>
+                                <th style="display: none;">Numero de ventas</th>
+                                <th sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')">Modificar</th>
+                                <th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+                                <th>Información</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="servicio : ${listaServicios}" id="tablaServicios">
+                            <tr>
+                                <td>
+                                    <!-- Verificar si la lista de imágenes está vacía o nula -->
+                                    <div th:if="${#lists.isEmpty(servicio.imagenes)}">
+                                        <!-- Mostrar una imagen predeterminada -->
+                                        <img src="/image/No-disponible.jpg" alt="Imagen predeterminada" />
+                                    </div>
+                                    <!-- Si hay imágenes, mostrar la primera imagen del servicio -->
+                                    <div th:unless="${#lists.isEmpty(servicio.imagenes)}">
+                                        <img th:src="${servicio.imagenes[0].url}" alt="Imagen del servicio" />
+                                    </div>
+                                </td>
+                                <td th:text="${servicio.nombre}"></td>
+                                <td>
+                                    <span th:utext="${servicio.destino_servicio + '<br/>' + servicio.pais_destino}"></span>
+                                </td>
+                                <td th:text="${servicio.fecha_servicio}"></td>
+                                <td th:text="${servicio.costo_servicio}"></td>
+                                <td class="hoverable" style="cursor: pointer">
+                                    <div class="nombreVendedor" style="display: none;">
+                                        <p th:text="${servicio.vendedor.nombre + ' ' + servicio.vendedor.apellido}"></p>
+                                    </div>
+                                    <span th:text="${servicio.vendedor.id_usuario}"></span>
+                                </td>
+                                <td th:text="${servicio.tipoServicio.descripcion}"></td>    
+                                <td th:text="${servicio.visitas}" style="display: none;"></td>
+                                <td th:text="${servicio.cantidad}" style="display: none;"></td>
+                                <td style="text-align: center" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')">
+                                    <a
+                                        class="modificar"
+                                        th:href="@{/servicio/modificar/__${servicio.codigo_servicio}__}"
+                                        ><i class="fas fa-feather-alt"></i> Modificar</a
+                                    >
+                                </td>
+                                <td  style="text-align: center" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                                    <a
+                                        class="eliminar"
+                                        th:href="@{/servicio/eliminar/__${servicio.codigo_servicio}__}"
+                                        ><i class="fas fa-trash"></i> Eliminar</a
+                                    >
+                                </td>
+                                <td  style="text-align: center;">
+                                    <a
+                                        class="verMas"
+                                        th:href="@{/servicio/detalle/__${servicio.codigo_servicio}__}"
+                                        ><i class="fas fa-plus-circle"></i> Ver más</a
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="filtrada" style="display: none">
+                    <h1>Listado de Servicios</h1>
+                    <table class="tabla" style="border: 1px solid white">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Destino</th>
+                                <th>Fecha del servicio</th>
+                                <th>Costo</th>
+                                <th>Vendedor</th>
+                                <th>Tipo de Servicio</th>
+                                <th style="display: none;">Visitas</th>
+                                <th style="display: none;">Numero de ventas</th>
+                                <th sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')">Modificar</th>
+                                <th sec:authorize="hasAnyRole('ROLE_ADMIN')">Eliminar</th>
+                                <th>Información</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="servicio : ${serviciosFiltrados}" id="tablaServiciosFiltrada">
+                            <tr>
+                                <td>
+                                    <!-- Verificar si la lista de imágenes está vacía o nula -->
+                                    <div th:if="${#lists.isEmpty(servicio.imagenes)}">
+                                        <!-- Mostrar una imagen predeterminada -->
+                                        <img src="/image/No-disponible.jpg" alt="Imagen predeterminada" />
+                                    </div>
+                                    <!-- Si hay imágenes, mostrar la primera imagen del servicio -->
+                                    <div th:unless="${#lists.isEmpty(servicio.imagenes)}">
+                                        <img th:src="${servicio.imagenes[0].url}" alt="Imagen del servicio" />
+                                    </div>
+                                </td>
+                                <td th:text="${servicio.nombre}"></td>
+                                <td>
+                                    <span th:utext="${servicio.destino_servicio + '<br/>' + servicio.pais_destino}"></span>
+                                </td>
+                                <td th:text="${servicio.fecha_servicio}"></td>
+                                <td th:text="${servicio.costo_servicio}"></td>
+                                <td class="hoverable" style="cursor: pointer">
+                                    <div class="nombreVendedor" style="display: none;">
+                                        <p th:text="${servicio.vendedor.nombre + ' ' + servicio.vendedor.apellido}"></p>
+                                    </div>
+                                    <span th:text="${servicio.vendedor.id_usuario}"></span>
+                                </td>
+                                <td th:text="${servicio.tipoServicio.descripcion}"></td>    
+                                <td th:text="${servicio.visitas}" style="display: none;"></td>
+                                <td th:text="${servicio.cantidad}" style="display: none;"></td>
+                                <td style="text-align: center" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')">
+                                    <a
+                                        class="modificar"
+                                        th:href="@{/servicio/modificar/__${servicio.codigo_servicio}__}"
+                                        ><i class="fas fa-feather-alt"></i> Modificar</a
+                                    >
+                                </td>
+                                <td  style="text-align: center" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                                    <a
+                                        class="eliminar"
+                                        th:href="@{/servicio/eliminar/__${servicio.codigo_servicio}__}"
+                                        ><i class="fas fa-trash"></i> Eliminar</a
+                                    >
+                                </td>
+                                <td  style="text-align: center;">
+                                    <a
+                                        class="verMas"
+                                        th:href="@{/servicio/detalle/__${servicio.codigo_servicio}__}"
+                                        ><i class="fas fa-plus-circle"></i> Ver más</a
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-volver" style="width: 100% ;display: flex; align-items: center; justify-content: center">
+                    <a th:href="@{/servicio/registrar}" class="botonLink"  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')">Agregar Servicio</a>
+                    <a th:href="@{/}" style="background: darkgray; margin-bottom: 3rem">Volver</a>
+                </div>
+            </section>
+        </div>
+        <footer th:replace = "~{/fragments/footer2 :: footer}"></footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+                                    $(document).ready(function () {
+                                        // Mostrar el nombre y apellido al hacer hover sobre los elementos con la clase hoverable
+                                        $('.hoverable').hover(function () {
+                                            $(this).find('.nombreVendedor').fadeIn();
+                                        }, function () {
+                                            $(this).find('.nombreVendedor').fadeOut();
+                                        });
+                                    });
+
+                                    function VerOpcionesFiltrado() {
+                                        const filtrosForm = document.getElementById('filtrosForm');
+                                        filtrosForm.style.display = 'block';
+                                    }
+
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const tipoServicioCheckbox = document.getElementById('tipoServicio');
+                                        const filtroTipoServicio = document.querySelector('.filtroTipoSercicio');
+                                        tipoServicioCheckbox.addEventListener('change', function () {
+                                            filtroTipoServicio.style.display = tipoServicioCheckbox.checked ? 'block' : 'none';
+                                        });
+
+                                        const paisCheckbox = document.getElementById('paises');
+                                        const filtroPais = document.querySelector('.filtroPais');
+                                        paisCheckbox.addEventListener('change', function () {
+                                            filtroPais.style.display = paisCheckbox.checked ? 'block' : 'none';
+                                        });
+
+                                        // Mostrar la tabla inicial al cargar la página
+                                        ocultarTablaFiltrada();
+                                    });
+
+                                    function verTablaFiltrada() {
+                                        const inicial = document.getElementById('inicial');
+                                        const filtrada = document.getElementById('filtrada');
+
+                                        inicial.style.display = 'block';
+                                        filtrada.style.display = 'none';
+                                    }
+
+                                    function ocultarTablaFiltrada() {
+                                        const inicial = document.getElementById('inicial');
+                                        const filtrada = document.getElementById('filtrada');
+
+                                        inicial.style.display = 'none';
+                                        filtrada.style.display = 'block';
+                                    }
+
+                                    function applyFilters() {
+
+                                        const masVendidosCheckbox = document.getElementById('masVendidos');
+                                        const masPopularesCheckbox = document.getElementById('masPopulares');
+
+                                        // Obtener los valores seleccionados en los select de "Más Vendidos" y "Más Populares"
+                                        const masVendidosSelect = document.getElementById('ordenMasVendidos');
+                                        const masPopularesSelect = document.getElementById('ordenMasPopulares');
+
+                                        if (masVendidosCheckbox.checked) {
+                                            masVendidosSelect.value = "masVendidos";
+                                        }
+                                        if (masPopularesCheckbox.checked) {
+                                            masPopularesSelect.value = "masPopulares";
+                                        }
+                                        // Enviar el formulario para obtener los resultados filtrados
+                                        console.log("Submitting form...");
+                                        document.getElementById('filtrosForm').submit();
+
+                                        // Mostrar la tabla filtrada y ocultar la tabla inicial
+                                        verTablaFiltrada();
+                                    }
+
+                                    // Función para limpiar los filtros
+                                    function limpiarFiltros() {
+                                        const filtrosForm = document.getElementById('filtrosForm');
+                                        filtrosForm.reset();
+                                        ocultarTablaFiltrada();  // Ocultar la tabla filtrada al limpiar los filtros
+                                        applyFilters();  // Aplicar los filtros después de limpiarlos
+                                    }
+
+                                    function handleCheckboxChange(checkboxId) {
+                                        const masVendidosCheckbox = document.getElementById('masVendidos');
+                                        const masPopularesCheckbox = document.getElementById('masPopulares');
+
+                                        if (checkboxId === 'masVendidos' && masVendidosCheckbox.checked) {
+                                            masPopularesCheckbox.disabled = true;
+                                        } else if (checkboxId === 'masPopulares' && masPopularesCheckbox.checked) {
+                                            masVendidosCheckbox.disabled = true;
+                                        } else {
+                                            masVendidosCheckbox.disabled = false;
+                                            masPopularesCheckbox.disabled = false;
+                                        }
+                                    }
+        </script>
+
+    </body>
+</html>
