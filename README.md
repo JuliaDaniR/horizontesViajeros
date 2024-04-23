@@ -1,4 +1,4 @@
-# horizontesViajeros
+# Horizontes Viajeros
 # Sistema de Gestión de Agencia de Turismo
 
 ## Descripción
