@@ -100,12 +100,12 @@ public class UsuarioController {
             System.out.println("edad " + edad);
 
             // Validar la edad del usuario
-            if (edad >= 18 && edad < 100) {
+            if (edad >= 18 && edad < 123) {
                 usuService.crearUsuario(nombre, apellido, direccion, dni,
                         fechaNacimiento, nacionalidad, celular,
                         email, cargo, sueldo, rol, password, password2);
                 redirectAttrs.addFlashAttribute("exito", "El usuario se registró correctamente");
-                return "index.html"; // Página de éxito
+                return "redirect:/"; // Página de éxito
             } else {
                 redirectAttrs.addFlashAttribute("error", "Debe ser mayor de 18 años para registrarse.");
                 return "registro.html";

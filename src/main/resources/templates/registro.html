@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-   <head th:replace = "~{/fragments/head :: head}"></head>
+    <head th:replace = "~{/fragments/head :: head}"></head>
     <body>
         <header class="contenedor-header">
             <nav th:replace = "/fragments/navbar :: nav"></nav>
@@ -154,44 +154,45 @@
                                         ></option>
                             </select>
                         </div>
-                        <div class="row mb-3 sueldo-cargo" style="display: none;">
-                            <div class="col-md-6">
-                                <label for="cargo" class="form-label" >Ingresa tu cargo</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Cargo"
-                                    id="nombre"
-                                    name="cargo"
-                                    th:value="${cargo}"
-                                    />
-                            </div>
-                            <div class="col-md-6">
-                                <label for="sueldo" class="form-label"
-                                       >Ingrese su sueldo</label
-                                >
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Sueldo"
-                                    name="sueldo"
-                                    th:value="${sueldo}"
-                                    />
-                            </div>
-                            <div class="mensaje-index" style="margin-top: 3rem">
+                    </div>
+                    <div class="row mb-3 sueldo-cargo" style="display: none;">
+                        <div class="col-md-6">
+                            <label for="cargo" class="form-label" >Ingresa tu cargo</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cargo"
+                                id="nombre"
+                                name="cargo"
+                                th:value="${cargo}"
+                                />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sueldo" class="form-label"
+                                   >Ingrese su sueldo</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Sueldo"
+                                name="sueldo"
+                                th:value="${sueldo}"
+                                />
+                        </div>
+                        <div class="mensaje-index" style="margin-top: 3rem">
                             <h3>Gracias por querer ser parte de nuestro Staff</h3>
                             <h3>Si eres aprobado como vendedor serás dado de alta</h3>
-                            </div>
                         </div>
-                        <div class="container-btn">
-                            <div th:replace = "~{/fragments/modelo :: div}"></div>
-                            <button type="submit" class="btn">
-                                Registrar nuevo Usuario
-                            </button>
-                            <div class="btn-volver">
-                                <a th:href="@{/}"><i class="fas fa-arrow-alt-circle-left" style="font-size: 1.5rem"></i></a>
-                            </div>
+                    </div>
+                    <div class="container-btn">
+                        <div th:replace = "~{/fragments/modelo :: div}"></div>
+                        <button type="submit" class="btn">
+                            Registrar nuevo Usuario
+                        </button>
+                        <div class="btn-volver">
+                            <a th:href="@{/}"><i class="fas fa-arrow-alt-circle-left" style="font-size: 1.5rem"></i></a>
                         </div>
+                    </div>
                 </form> 
             </div>
         </main>

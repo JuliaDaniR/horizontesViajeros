@@ -7,6 +7,7 @@
             <div th:each="imagen : ${listaImagenes}" 
                  th:style="'background-image: url(' + ${imagen} + ')'">
             </div>
+            <div th:replace = "~{/fragments/modelo :: div}"></div>
             <div class="cartel">
 
                 <span class="titulo-cartel text-3xl text-blue-300">Elige tu aventura</span>
@@ -42,7 +43,7 @@
             <div id="frase">
                 <!-- Aquí se mostrará la frase -->
             </div>
-            <div th:replace = "/fragments/modelo :: div"></div>
+            
         </header>
         <main class="main">
             <div class="descripcion">
