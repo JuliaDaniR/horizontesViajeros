@@ -1,0 +1,62 @@
+<section id="section" xmlns:th="http://www.thymeleaf.org">
+    <h1 class="titulo-main">
+        Los más vendidos
+    </h1>
+    <h3 class="descripcion-main">
+        Explora nuestra selección de servicios turísticos más populares que han encantado a nuestros clientes. Desde la comodidad de los hoteles hasta la emoción de las excursiones y eventos exclusivos, estos son los favoritos que no te puedes perder. Descubre por qué estos servicios son los más solicitados y haz tu reserva hoy mismo para asegurar tu lugar en estas experiencias inolvidables. ¡Prepárate para vivir momentos extraordinarios con nuestros servicios turísticos más vendidos!
+    </h3>
+    <div class="section-cards">
+        <div th:each="servicio, iterStat : ${listaServiciosMasVendidos}" class="card" th:if="${iterStat.index < 5}"> 
+            <article class="article">
+                <div class="grow">
+                    <div class="relativa">
+                        <h3 class="text-2xl font-bold font-playfair text-emerald-800 capitalize text-center py-5 cursor-pointer"
+                            th:text="${servicio.nombre}"
+
+                            >
+                            Servicio Name
+                        </h3>
+                    </div>
+                    <figure th:each="imagen, iterStat :  ${servicio.imagenes}" class="mb-2"  th:if="${iterStat.index < 1}">
+                        <img class="img"
+                             th:src="${imagen.url}"
+                             alt="imagen del servicio"
+                             />
+                    </figure>
+                    <div class="container-btn text-center mt-auto z-10">
+                        <button onclick="showDetails(this)">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+                        <div
+                        class="relative hidden">
+                        <div class="p-6 ">
+                            <div class="text-center">
+                                <h3 class="destino" th:text="'Destino: ' + ${servicio.destino_servicio}"
+                                    >
+                                    Destino
+                                </h3>
+                                <p 
+                                    th:text="${servicio.descripcion_breve}"
+                                    >
+                                    Descripción
+                                </p>
+                                <p class="costo"
+                                   th:text="'Costo: $' + ${servicio.costo_servicio}"
+                                   >
+                                    Costo
+                                </p>
+                            </div>
+                            <div class="container-btn">
+                                <button onclick="hideDetails(this)">
+                                    Ver menos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </article>
+            
+        </div>
+    </div>
+</section>

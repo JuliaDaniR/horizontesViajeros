@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace = "~{/fragments/head :: head}"></head>
+    <body>
+        <nav th:replace = "~{/fragments/navbar :: nav}"></nav>
+        <header id="encabezado" class="h-[500px] bg-cover bg-center relative flex items-center justify-center w-full bg-[#ddd]">
+            <div th:each="imagen : ${listaImagenes}" 
+                 th:style="'background-image: url(' + ${imagen} + ')'">
+            </div>
+            <div th:replace = "~{/fragments/modelo :: div}"></div>
+            <div class="cartel">
+
+                <span class="titulo-cartel text-3xl text-blue-300">Elige tu aventura</span>
+                <span class="texto-cartel text-sm">
+                    ¡Descubre nuestras ofertas exclusivas y elige el paquete perfecto
+                    para tus vacaciones! Desde pasajes de avión
+                    y hotel hasta opciones adicionales para personalizar tu
+                    experiencia.</span>
+                <ul class="contenedor-iconos">
+                    <li>
+                        <i class="fas fa-plane"></i> <!-- Avión -->
+                    </li>
+                    <li>
+                        <i class="fas fa-car-alt"></i> <!-- Coche -->
+                    </li>
+                    <li>
+                        <i class="fas fa-hotel"></i> <!-- Hotel -->
+                    </li>
+                    <li>
+                        <i class="fas fa-bus-alt"></i> <!-- Autobús -->
+                    </li>
+                    <li>
+                        <i class="fas fa-train"></i> <!-- Tren -->
+                    </li>
+                    <li>
+                        <i class="fas fa-calendar-alt"></i> <!-- Calendario -->
+                    </li>
+                    <li>
+                        <i class="fas fa-route"></i> <!-- Ruta -->
+                    </li>
+                </ul>
+            </div>
+            <div id="frase">
+                <!-- Aquí se mostrará la frase -->
+            </div>
+            
+        </header>
+        <main class="main">
+            <div class="descripcion">
+                <h1 class="titulo-main">
+                    Nuestros Servicios
+                </h1>
+                <h3 class="descripcion-main">
+                    En Horizontes Viajeros, estamos comprometidos a hacer que cada paso de
+                    tu viaje sea memorable y sin preocupaciones. ¡Déjanos ser tu compañero
+                    de viaje confiable!
+                </h3>
+                <h3 class="descripcion-main">
+                    En Horizontes Viajeros, nos enorgullece ofrecer una amplia gama de
+                    servicios diseñados para hacer que tu experiencia de viaje sea
+                    inolvidable. Ya sea que estés buscando el alojamiento perfecto, la
+                    libertad de explorar a tu propio ritmo, o la comodidad de reservar tus
+                    medios de transporte, ¡nosotros lo tenemos cubierto! Descubre nuestros
+                    servicios a continuación:
+                </h3>
+            </div>
+
+            <div class="container">
+                <!-- Contenedor de miniaturas -->
+                <div id="thumbnails" class="thumbnails"></div>
+
+                <!-- Imagen principal -->
+                <div id="mainImage" class="main-image"></div>
+
+                <!-- Contenido principal del servicio -->
+                <div id="serviceContent" class="content">
+                    <div class="contenido">
+                        <h2 id="serviceName"></h2>
+                        <p id="serviceDescription"></p>
+                    </div>
+                    <!-- Contenedor del botón + -->
+                    <div id="plusButtonContainer" class="cont-fa-plus" th:style="${session.usuariosession} ? 'display: flex;' : 'display: none;'">
+                        <a id="plusButton" th:href="@{'/servicio/listarPorTipo/' + ${codigo}}"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="nav">
+                    <button id="prevButton" class="btn prev" >Prev</button>
+                    <button id="nextButton" class="btn next">Next</button>
+                </div>
+            </div>
+
+        </main>
+        <div th:replace = "/fragments/publicidad :: div"></div>
+        <section th:replace = "/fragments/section :: section"></section>
+
+        <section id="sectionHome">
+            <div class="text-center" style="padding: 1rem">
+                <h2 class="titulo-main servicio-estrella">
+                    &#11088; Servicios estrella &#11088;
+                </h2>
+                <h3 class="descripcion-main">
+                    Descubre nuestros servicios estrella, cuidadosamente seleccionados para ofrecerte experiencias turísticas inigualables. Desde la comodidad de los hoteles hasta la libertad de explorar con alquiler de autos, estos son los servicios que destacan por su calidad y excelencia. Con una atención excepcional al detalle y una pasión por brindar experiencias memorables, nuestros servicios estrella están diseñados para superar tus expectativas y convertir cada viaje en una aventura inolvidable. ¡Embárcate en una experiencia única con nuestros servicios estrella y haz de tu viaje una experiencia inolvidable!
+                </h3>
+            </div>
+            <div id="serviciosContainer">
+                <!-- Aquí se agregarán dinámicamente los servicios -->
+            </div>
+        </section>
+        <div class="contain-final">
+            <h2 class="titulo-final ">
+                ¿Listo para comenzar tu próxima aventura?
+            </h2>
+            <h3 class="texto-final">
+                En Horizontes Viajeros, estamos aquí para hacer realidad tus sueños de
+                viaje. Ya sea que estés planeando unas vacaciones relajantes en la
+                playa, una emocionante expedición de aventura o un viaje cultural en
+                una ciudad vibrante, estamos aquí para ayudarte en cada paso del
+                camino. Nuestro equipo experto está listo para brindarte asistencia
+                personalizada y recomendaciones cuidadosamente seleccionadas para que
+                tu viaje sea único y memorable. No esperes más, ¡contáctanos hoy mismo
+                y comienza a planificar la escapada de tus sueños!
+            </h3>
+        </div>
+        <footer th:replace = "~{/fragments/footer :: footer}"></footer>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var listaImagenes = /*[[${listaImagenes}]]*/ [];
+            var listaFrases = /*[[${listaFrases}]]*/ [];
+            var indice = 0;
+
+            function cambiarImagenYFrase() {
+                // Obtener elementos del DOM
+                var encabezado = document.getElementById('encabezado');
+                var fraseElemento = document.getElementById('frase');
+
+                // Cambiar la imagen de fondo
+                encabezado.style.backgroundImage = 'url(' + listaImagenes[indice] + ')';
+
+                // Cambiar la frase
+                fraseElemento.textContent = listaFrases[indice];
+
+                // Incrementar el índice o volver al principio si llega al final
+                indice = (indice + 1) % listaImagenes.length;
+            }
+
+// Llamar a la función para cambiar la imagen y la frase cada 5 segundos
+            setInterval(cambiarImagenYFrase, 5000); // 5000 milisegundos = 5 segundos
+            /*]]>*/
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            // Usa $(document).ready() o $(function() {}) para ejecutar código después de cargar el DOM
+            $(document).ready(function () {
+                $('.dropdown-toggle').dropdown();
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var errorDiv = document.querySelector(".error");
+                var exitoDiv = document.querySelector(".exito");
+
+                if (errorDiv) {
+                    setTimeout(function () {
+                        errorDiv.classList.add("hidden");
+                    }, 3000); // Mostrar durante 3 segundos (3000 milisegundos)
+                }
+
+                if (exitoDiv) {
+                    setTimeout(function () {
+                        exitoDiv.classList.add("hidden");
+                    }, 3000); // Mostrar durante 3 segundos (3000 milisegundos)
+                }
+            });
+
+        </script>
+        <script th:inline="javascript" src="/js/home.js"></script>
+</html>

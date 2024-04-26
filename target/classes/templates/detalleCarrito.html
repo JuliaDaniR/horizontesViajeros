@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="~{/fragments/head :: head}"></head>
+    <body id="estilo-detalle-carrito" style="background-image: url('https://thumbs.dreamstime.com/z/fondo-del-viaje-y-del-turismo-41417547.jpg');background-size: cover; background-position: center">
+        <header class="contenedor-header-formulario">
+            <nav th:replace="~{/fragments/navbar :: nav}"></nav>
+        </header>
+        <div style="display: flex; justify-content: center; align-items: center; padding-top: 10rem;">
+            <div class="container-detalle">
+                <h1 style="text-align: center; border-bottom: 3px double black; color: #0d4645;padding: 1rem">Detalle del Carrito</h1>
+                <div th:if="${carrito.empty}" style="text-align: center; border-bottom: 1px solid black;">
+                    <p>No hay elementos en el carrito.</p>
+                </div>
+                <div th:each="item : ${carrito}" style="border-bottom: 3px double black;padding-bottom: 2rem">
+                    <div>
+                        <h3 th:text="${item.nombre}"></h3>
+                        <p>Cantidad: <span th:text="${item.cantidad}"></span></p>
+                        <p>Precio unitario: $<span th:text="${item.costo_servicio}"></span></p>
+                        <p>Total por servicio: $<span th:text="${item.cantidad * item.costo_servicio}"></span></p>
+
+                        <!-- Formulario para eliminar del carrito -->
+                        <form th:action="@{/venta/eliminarDelCarrito}" method="post">
+                            <input type="hidden" name="servicioId" th:value="${item.codigo_servicio}">
+                            <button type="submit">Eliminar del carrito</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Resumen de compra</h3>
+                    <p>Subtotal: $<span th:text="${subtotal}"></span></p>
+                    <p>Descuento: $<span th:text="${descuento}"></span></p>
+                    <p>Total a pagar: $<span th:text="${total}"></span></p>
+                </div>
+                <form th:action="@{/venta/registrarVenta}" method="post">
+                    <!-- Campos ocultos con los datos necesarios para la venta -->
+                    <input type="hidden" name="servicioId" th:value="${servicio.codigo_servicio}">
+                    <input type="hidden" name="paqueteId" th:value="${paqueteTuristico.codigo_paquete}">
+                    <input type="hidden" name="cantidad" th:value="${carrito.size()}"> <!-- Cantidad de servicios en el carrito -->
+
+                    <!-- Lista de IDs de usuarios -->
+                    <div th:each="usuario : ${usuarios}">
+                        <input type="hidden" name="usuarioIds" th:value="${usuario.id_usuario}">
+                    </div>
+
+                    <!-- Menú desplegable para seleccionar el medio de pago -->
+                    <div>
+                        <label for="medioPago">Medio de Pago:</label>
+                        <select name="medioPago" id="medioPago">
+                            <option value="Tarjeta">Tarjeta de Crédito</option>
+                            <option value="TarjetaDebito">Tarjeta de Débito</option>
+                            <option value="Transferencia">Transferencia Bancaria</option>
+                            <option value="Efectivo">Pago en Efectivo</option>
+                            <option value="monederoVirtual">Monedero Virtual</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="boton" style="background: darkolivegreen;border: 2px solid darkolivegreen;">Comprar</button>
+                </form>
+            </div>        
+        </div>
+        <div class="btn-volver" style="width: 100% ;display: flex; align-items: center; justify-content: center">
+            <a th:href="@{/}" style="background: black; color: white; padding: .4rem; font-size: 1.2rem">Salir</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace = "~{/fragments/head :: head}"></head>
+    <body>
+        <header class="contenedor-header" >
+            <nav th:replace = "/fragments/navbar :: nav"></nav>
+            <div th:replace = "/fragments/modelo :: div"></div>
+        </header>
+        <main class="main-login" style="background-image: url('https://img.freepik.com/foto-gratis/accesorios-viaje-sobre-mapa-mesa_23-2147856153.jpg?w=900')">
+            <div class="contenedor-form-login" style="background: linear-gradient(115deg, #f0efed, #fae49b, #db9635); color:black">
+                <h1 style="background: linear-gradient(115deg, #f0efed, #fae49b, #db9635); color:black">Modificar Servicio</h1>
+                <form th:action="@{/servicio/modificar}" method="POST" enctype="multipart/form-data" class="form-modificar-servicios">
+                    <!-- Campo oculto para el ID del servicio -->
+                    <input type="hidden" name="codigo_servicio" th:value="${servicio.codigo_servicio}">
+
+                    <div>
+                        <label for="nombre">Nombre del servicio:</label>
+                        <input type="text" id="nombre" name="nombre" th:value="${servicio.nombre}">
+                    </div>
+                    <div>
+                        <label for="descripcion_breve">Descripción breve:</label>
+                        <textarea id="descripcion_breve" name="descripcion_breve" rows="4" cols="50" th:text="${servicio.descripcion_breve}"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="destino_servicio">Destino del servicio:</label>
+                        <input type="text" id="destino_servicio" name="destino_servicio" th:value="${servicio.destino_servicio}">
+                    </div>
+                    <div>
+                        <label for="pais_destino">País del destino:</label>
+                        <input type="text" id="pais_destino" name="pais_destino" th:value="${servicio.pais_destino}">
+                    </div>
+                    <div>
+                        <label for="fecha_servicio">Fecha del servicio:</label>
+                        <input type="date" id="fecha_servicio" name="fecha_servicio" th:value="${servicio.fecha_servicio}">
+                    </div>
+                    <div>
+                        <label for="costo_servicio">Costo del servicio:</label>
+                        <input type="number" id="costo_servicio" name="costo_servicio" th:value="${servicio.costo_servicio}">
+                    </div>
+                    <div>
+                        <label for="tipoServicio">Tipo de Servicio:</label>
+                        <select id="tipoServicio" name="tipoServicio">
+                            <option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.descripcion}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="id_usuario">Vendedor:</label>
+                        <select id="id_usuario" name="id_usuario">
+                            <option th:each="usuario : ${listaVendedores}" th:value="${usuario.id_usuario}" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></option>
+                        </select>
+                    </div>
+                    <div class="image-thumbnails">
+                        <div th:each="imagen, i : ${servicio.imagenes}" style="display: flex; margin: 2rem auto; align-content: center">
+                            <div>
+                                <input type="hidden" th:name="'id_imagen' + ${i.index}" th:value="${imagen.id}">
+                                <label th:text="'URL de la Imagen ' + (${i.index + 1}) + ':'"></label>
+                                <input type="text" th:id="'url_imagen' + ${i.index}" th:name="'url_imagen' + ${i.index}" th:value="${imagen.url}" required>
+                            </div>
+                            <div>
+                                <img th:src="${imagen.url}" alt="Imagen ${(i.index) + 1}" style="width: 100px; height: 100px; margin-left: 4rem">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campos adicionales para nuevas imágenes (máximo 4) -->
+                    <div th:each="i : ${#numbers.sequence(0, 3)}" th:if="${#lists.size(servicio.imagenes) + i < 4}">
+                        <label th:text="'URL de la Imagen ' + (${#lists.size(servicio.imagenes) + i + 1}) + ':'" th:if="${#lists.size(servicio.imagenes) + i < 4}"></label>
+                        <input type="text" th:id="'url_imagen' + (${#lists.size(servicio.imagenes) + i})" th:name="'url_imagen' + (${#lists.size(servicio.imagenes) + i})">
+                    </div>
+
+                    <!-- Campo oculto para IDs de imágenes existentes -->
+                    <input type="hidden" name="id_imagenes" th:value="${servicio.imagenes.![id].toString().replace('[', '').replace(']', '').replace(' ', '')}">
+                    <button style="margin: 3rem auto; width: 60%; background-color:black; border-radius: 20px; color: #db9635 " type="submit">Guardar cambios</button>
+                </form>
+            </div>
+             <div class="btn-volver" style="width: 100% ;display: flex; align-items: center; justify-content: center">
+            <a th:href="@{/}" style="background: black; color: white; padding: .4rem; font-size: 1.2rem">Salir</a>
+        </div>
+        </main>
+        <footer th:replace = "~{/fragments/footer2 :: footer}"></footer>
+    </body>
+
+</html>
+

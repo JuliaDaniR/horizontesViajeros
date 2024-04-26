@@ -1,0 +1,47 @@
+<nav class="navegacion" xmlns:th="http://www.thymeleaf.org">
+
+    <input type="checkbox" id="check"/>
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+
+    <span class="textColor">
+        <a th:href="@{/}" class="cursor-pointer" style="text-decoration: none">
+            Horizontes Viajeros
+        </a>
+    </span>
+
+    <div class="enlaces">
+        <input type="checkbox" id="check"/>
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars" style="font-weight: 900; margin-left: 1rem;"></i>
+        </label>
+        <a th:if="${session.usuariosession == null}" th:href="@{/login}" class="botonLink">Ingresar</a>
+        <a th:if="${session.usuariosession == null}" th:href="@{/usuario/registrar}" class="botonLink">Registrarse</a>
+        <a href="#contacto" th:if="${session.usuariosession == null}">Contacto</a>
+
+        <div class="enlaces-otro" th:if="${session.usuariosession != null}">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Servicios
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                <li><a  class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/usuario/reporteVentas/__${session.usuariosession.id_usuario}__}">Reporte</a></li>
+                <li><a  class="dropdown-item" th:href="@{/servicio/listar/__${session.usuariosession.id_usuario}__}" >Ver Servicios</a></li>
+            </ul>
+            <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ROLE_CLIENTE')" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Carrito
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                <li><a  class="dropdown-item"  th:href="@{/venta/carritoDetalle}" >Compra</a></li>
+            </ul>
+            <a class="nav-link dropdown-toggle" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Perfil
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                <li><a  class="dropdown-item" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/usuario/listar}" >Ver Usuarios</a></li>
+                <li><a  class="dropdown-item" th:href="@{/usuario/modificar/__${session.usuariosession.id_usuario}__}" >Información</a></li>
+                <li><a  class="dropdown-item" th:href="@{/logout}" >Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

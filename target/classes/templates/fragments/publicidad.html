@@ -1,0 +1,45 @@
+<div>
+        <div th:if="${session.usuariosession == null}" class="publicidad">
+          <h1
+            className="my-auto mx-auto text-xl md:text-4xl lg:text-3xl font-bold font-roboto "
+            style="transform: rotate(-6deg)"
+          >
+            Encontrá tu próximo destino.
+            <br /> Regístrate y vivi una experiencia única
+          </h1>
+          <img
+            src="/image/imagenTurismo.png"
+            alt=""
+            class="imagen-publicidad"
+          />
+        </div>
+        <div th:if="${session.usuariosession != null}" >
+            <div sec:authorize="hasAnyRole('CLIENTE')" class="publicidad mx-auto mt-24 mb-24 bg-orange-200 w-[350px] base:w-[768px] md:w-[1024px] lg:w-[1400px] xl:w-[1800px] h-[200px] md:h-[400px] flex justify-around text-center">
+              <h1
+                class="my-auto mx-auto text-xl md:text-4xl lg:text-3xl font-bold font-roboto "
+                style = "transform: rotate(-6deg)"
+              >
+                Encontrá tu paquete preferido y ahorra con un 10% de descuento
+                <br /> Vive una experiencia única
+              </h1>
+              <img
+                src="/image/publicidadLogueado.png"
+                alt=""
+                class="imagen-publicidad"
+              />
+            </div>
+            <div sec:authorize="hasAnyRole('ADMIN','VENDEDOR')" class="publicidad mx-auto mt-24 bg-orange-200 w-[350px] base:w-[768px] md:w-[1024px] lg:w-[1400px] xl:w-[1800px] h-[200px] md:h-[400px] flex justify-around text-center">
+              <h1
+                style= "transform: rotate(-6deg)"
+              >
+                Mejora tus ventas Agregando detalles a tus publicaciones
+                <br /> Gracias por ser parte de nuestro staff
+              </h1>
+              <img
+                src="/image/publicidadVendedor.png"
+                alt=""
+                class="imagen-publicidad"
+              />
+            </div>
+        </div>
+  </div>

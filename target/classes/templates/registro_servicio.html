@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace = "~{/fragments/head :: head}"></head>
+    <body>
+        <header class="contenedor-header" >
+            <nav th:replace = "/fragments/navbar :: nav"></nav>
+            <div th:replace = "/fragments/modelo :: div"></div>
+        </header>
+        <main class="main-login" style="background-image: url('https://img.freepik.com/foto-gratis/accesorios-viaje-sobre-mapa-mesa_23-2147856153.jpg?w=900')">
+            <div class="contenedor-form-login" style="background: linear-gradient(115deg, #f0efed, #fae49b, #db9635); color:black">
+                <h1 style="background: linear-gradient(115deg, #f0efed, #fae49b, #db9635); color:black">Regístrar nuevo Servicio</h1>
+                <form th:action="@{/servicio/registro}" method="POST" enctype="multipart/form-data">
+                    <div>
+                        <label for="nombre">Nombre del servicio:</label>
+                        <input  type="text"
+                                class="form-control"
+                                placeholder="Nombre"
+                                id="nombre"
+                                name="nombre"
+                                th:value="${nombre}">
+                    </div>
+                    <div>
+                        <label for="descripcion_breve">Descripción breve:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Descripción breve:"
+                            id="descripcion_breve"
+                            name="descripcion_breve"
+                            th:value="${descripcion_breve}">
+                    </div>
+                    <div>
+                        <label for="destino_servicio">Destino del servicio:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Destino del servicio:"
+                            id="destino_servicio"
+                            name="destino_servicio"
+                            th:value="${destino_servicio}">
+                    </div>
+                    <div>
+                        <label for="pais_destino">País del destino:</label>
+                        <select class="form-control" id="pais_destino" name="pais_destino">
+                            <option>Seleccionar pais</option>
+                            <option th:each="pais : ${paises}" th:value="${pais_destino}" th:text="${pais}" style="color: black"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="fecha_servicio">Fecha del servicio:</label>
+                        <input 
+                            type="date"
+                            class="form-control"
+                            placeholder="Fecha del servicio:"
+                            id="fecha_servicio"
+                            name="fecha_servicio"
+                            th:value="${fecha_servicio}"
+                            />
+                    </div>
+                    <div>
+                        <label for="costo_servicio">Costo del servicio:</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Costo del servicio:"
+                            name="costo_servicio"
+                            th:value="${costo_servicio}"
+                            />
+                    </div>
+                    <div class="select-container">
+                        <label for="selectRol" class="form-label">Tipo servicio</label>
+                        <select name="tipoServicio" id="selectRol" class='form-select'>
+                            <option>Seleccionar tipo</option>
+                            <!-- Iterar sobre los tipos de servicio y agregar opciones -->
+                            <option th:each="tipoServicio : ${tipos}" th:value="${tipoServicio}" th:text="${tipoServicio.descripcion}"> </option>
+                        </select>
+                    </div>
+                    <div class="select-container">
+                        <label for="usuarios">Seleccionar Usuarios</label>
+                        <select id="usuarios" name="id_usuario" class="form-select mb-3">
+                            <option label="Elije Vendedor" value=""></option>
+                            <!-- Para el rol de ADMIN -->
+                            <option sec:authorize="hasAnyRole('ROLE_ADMIN')" 
+                                    th:each="usuario : ${listaVendedores}" 
+                                    th:value="${usuario.id_usuario}" 
+                                    th:text="${usuario.nombre + ' ' + usuario.apellido}"></option>
+
+                            <!-- Para el rol de VENDEDOR -->
+                            <option sec:authorize="hasAnyRole('ROLE_VENDEDOR')"
+                                    th:value="${usuario.id_usuario}" 
+                                    th:text="${usuario.nombre + ' ' + usuario.apellido}"></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="url_imagen1">URL de la Imagen 1:</label>
+                        <input type="text" id="url_imagen1" name="url_imagen1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="url_imagen2">URL de la Imagen 2:</label>
+                        <input type="text" id="url_imagen2" name="url_imagen2">
+                    </div>
+                    <div class="mb-3">
+                        <label for="url_imagen3">URL de la Imagen 3:</label>
+                        <input type="text" id="url_imagen3" name="url_imagen3">
+                    </div>
+                    <div class="mb-3">
+                        <label for="url_imagen4">URL de la Imagen 4:</label>
+                        <input type="text" id="url_imagen4" name="url_imagen4">
+                    </div>
+                    <div style="display: flex; justify-content: space-around ">
+                        <button type="submit" style="padding: 0 .5rem ; border-radius: 10px; margin: 1rem 0">Registrar servicio</button>
+                    </div>
+                </form>
+            </div>
+            
+        </main>
+        <footer th:replace = "~{/fragments/footer2 :: footer}"></footer>
+    </body>
+</html>
