@@ -20,9 +20,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "agencia_turismo"
-      MYSQL_USER: "agencia_turismo"
+      MYSQL_USER: "root"
       MYSQL_PASSWORD: "root"
 
-volumes:
-  mysql-data:
-    external: false
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: java_db
+      MYSQL_ROOT_PASSWORD: root
