@@ -1,9 +1,4 @@
-HELP.md
-## target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
+# Archivos y directorios generados por el entorno de desarrollo
 ### STS ###
 .apt_generated
 .classpath
@@ -37,3 +32,8 @@ src/main/resources/static/css/tailwind.css
 src/main/resources/static/css/tailwind.min.css
 src/main/resources/static/css/tailwind.js
 
+# Ignorar el directorio target/ excepto maven-wrapper.jar y los directorios dentro de src/main/ y src/test/
+target/*
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
