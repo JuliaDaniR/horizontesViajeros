@@ -7,10 +7,6 @@ services:
     build: .
     ports:
       - 8080:8080
-    environment:
-      - DATABASE_URL=jdbc:mysql://java_db:3306/java_db?useSSL=false&serverTimezone=UTC
-      - DATABASE_USERNAME=root
-      - DATABASE_PASSWORD=root
     depends_on:
       - java_db
 
@@ -18,7 +14,7 @@ services:
     container_name: java_db
     image: "mysql:5.7"
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
