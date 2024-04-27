@@ -24,7 +24,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "agencia_turismo"
-      MYSQL_USER: "agencia_turismo"
+      MYSQL_USER: "root"
       MYSQL_PASSWORD: "root"
 
 volumes:
