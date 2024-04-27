@@ -3,7 +3,7 @@
 FROM openjdk:17-jdk-alpine
 
 # Define las variables de entorno para la base de datos
-ENV DATABASE_URL=jdbc:mysql://java_db:3306/agencia_turismo?useSSL=false&serverTimezone=UTC
+ENV DATABASE_URL=jdbc:mysql://phpmyadmin:8081/agencia_turismo?useSSL=false&serverTimezone=UTC
 ENV DATABASE_USERNAME=root
 ENV DATABASE_PASSWORD=root
 
