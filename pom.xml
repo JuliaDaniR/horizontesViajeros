@@ -96,6 +96,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <mainClass>com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,32 +1,40 @@
 version: "3.9"
 
 services:
-  java_app:
-    container_name: java_app
-    image: julidrz-java-app:1.0.0
-    build: .
-    ports:
-      - 8080:8080
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
     environment:
-      - DATABASE_URL=jdbc:mysql://java_db:3306/java_db?useSSL=false&serverTimezone=UTC
-      - DATABASE_USERNAME=root
-      - DATABASE_PASSWORD=root
-    depends_on:
-      - java_db
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - target: $MYSQLDB_DOCKER_PORT
+        published: $MYSQLDB_LOCAL_PORT
 
-  java_db:
-    container_name: java_db
-    image: "mysql:5.7"
-    ports:
-      - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - db:/var/lib/mysql
+
+  app:
+    depends_on:
+      - mysqldb
+    build: ./
+    restart: on-failure
+    ports:
+      - target: $SPRING_DOCKER_PORT
+        published: $SPRING_LOCAL_PORT
+       
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_DATABASE: "agencia_turismo"
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "root"
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?useSSL=false",
+        "spring.datasource.username" : "$MYSQLDB_USER",
+        "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
 
 volumes:
-  mysql-data:
-    external: false
+  db:
