@@ -7,19 +7,26 @@ services:
     build: .
     ports:
       - 8080:8080
-    depends_on:
-      - phpmyadmin
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin
-    ports:
-      - "8081:80"
     environment:
-      PMA_HOST: java_db
-      MYSQL_ROOT_PASSWORD: root
+      - DATABASE_URL=jdbc:mysql://java_db:3306/java_db?useSSL=false&serverTimezone=UTC
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+    depends_on:
+      - java_db
+
+  java_db:
+    container_name: java_db
+    image: "mysql:5.7"
+    ports:
+      - "3306:3306"
     volumes:
-      - phpmyadmin_data:/var/lib/phpmyadmin
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "agencia_turismo"
+      MYSQL_USER: "agencia_turismo"
+      MYSQL_PASSWORD: "root"
 
 volumes:
-  phpmyadmin_data:
+  mysql-data:
+    external: false
