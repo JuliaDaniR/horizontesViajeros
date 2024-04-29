@@ -87,6 +87,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplication</mainClass>
                     <image>
                         <builder>paketobuildpacks/builder-jammy-base:latest</builder>
                     </image>
@@ -95,8 +96,7 @@
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
-                    </excludes>
-                    <mainClass>com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplication</mainClass>
+                    </excludes>                   
                 </configuration>
             </plugin>
         </plugins>

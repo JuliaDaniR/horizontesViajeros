@@ -9,20 +9,5 @@ WORKDIR /agencia-de-turismo
 COPY pom.xml .
 COPY target/agencia-de-turismo-0.0.1-SNAPSHOT.jar app.jar
 
-# Instala Maven en el contenedor
-RUN apk add --no-cache maven
-
-# Ejecuta el comando "mvn clean install" para construir la aplicación
-RUN mvn clean install
-
 # Define el comando de entrada para ejecutar la aplicación al iniciar el contenedor
 CMD ["java", "-jar", "app.jar"]
-
-ENV MYSQLDB_USER=root
-ENV MYSQLDB_ROOT_PASSWORD=
-ENV MYSQLDB_DATABASE=agencia-de-turismo
-ENV MYSQLDB_LOCAL_PORT=3307
-ENV MYSQLDB_DOCKER_PORT=3306
-
-ENV SPRING_LOCAL_PORT=6868
-ENV SPRING_DOCKER_PORT=8080

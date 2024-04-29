@@ -8,6 +8,7 @@ public class AgenciaDeTurismoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AgenciaDeTurismoApplication.class, args);
-	}
+
+        }
 
 }

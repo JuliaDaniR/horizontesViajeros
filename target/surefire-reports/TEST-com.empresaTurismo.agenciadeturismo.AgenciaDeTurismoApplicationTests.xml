@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests" time="9.577" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests" time="23.744" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="AR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="sun.java.command" value="C:\Users\julid\AppData\Local\Temp\surefire3885989855501301761\surefirebooter-20240427151225708_3.jar C:\Users\julid\AppData\Local\Temp\surefire3885989855501301761 2024-04-27T15-12-25_433-jvmRun1 surefire-20240427151225708_1tmp surefire_0-20240427151225708_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\julid\AppData\Local\Temp\surefire15509296894672645901\surefirebooter-20240429135645943_3.jar C:\Users\julid\AppData\Local\Temp\surefire15509296894672645901 2024-04-29T13-56-45_753-jvmRun1 surefire-20240429135645943_1tmp surefire_0-20240429135645943_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\julid\OneDrive\Escritorio\Agencia Turismo con Spring\agencia-de-turismo\target\test-classes;C:\Users\julid\OneDrive\Escritorio\Agencia Turismo con Spring\agencia-de-turismo\target\classes;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.2.3\spring-boot-starter-data-jpa-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.2.3\spring-boot-starter-aop-3.2.3.jar;C:\Users\julid\.m2\repository\org\aspectj\aspectjweaver\1.9.21\aspectjweaver-1.9.21.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.2.3\spring-boot-starter-jdbc-3.2.3.jar;C:\Users\julid\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\julid\.m2\repository\org\springframework\spring-jdbc\6.1.4\spring-jdbc-6.1.4.jar;C:\Users\julid\.m2\repository\org\hibernate\orm\hibernate-core\6.4.4.Final\hibernate-core-6.4.4.Final.jar;C:\Users\julid\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\julid\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\julid\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\julid\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\julid\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\julid\.m2\repository\com\fasterxml\classmate\1.6.0\classmate-1.6.0.jar;C:\Users\julid\.m2\repository\net\bytebuddy\byte-buddy\1.14.12\byte-buddy-1.14.12.jar;C:\Users\julid\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.4\jaxb-runtime-4.0.4.jar;C:\Users\julid\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.4\jaxb-core-4.0.4.jar;C:\Users\julid\.m2\repository\org\glassfish\jaxb\txw2\4.0.4\txw2-4.0.4.jar;C:\Users\julid\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\julid\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\julid\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\julid\.m2\repository\org\springframework\data\spring-data-jpa\3.2.3\spring-data-jpa-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\data\spring-data-commons\3.2.3\spring-data-commons-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\spring-orm\6.1.4\spring-orm-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\spring-context\6.1.4\spring-context-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\spring-tx\6.1.4\spring-tx-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\spring-beans\6.1.4\spring-beans-6.1.4.jar;C:\Users\julid\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\julid\.m2\repository\org\springframework\spring-aspects\6.1.4\spring-aspects-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-mail\3.2.3\spring-boot-starter-mail-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter\3.2.3\spring-boot-starter-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.2.3\spring-boot-starter-logging-3.2.3.jar;C:\Users\julid\.m2\repository\ch\qos\logback\logback-classic\1.4.14\logback-classic-1.4.14.jar;C:\Users\julid\.m2\repository\ch\qos\logback\logback-core\1.4.14\logback-core-1.4.14.jar;C:\Users\julid\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.21.1\log4j-to-slf4j-2.21.1.jar;C:\Users\julid\.m2\repository\org\apache\logging\log4j\log4j-api\2.21.1\log4j-api-2.21.1.jar;C:\Users\julid\.m2\repository\org\slf4j\jul-to-slf4j\2.0.12\jul-to-slf4j-2.0.12.jar;C:\Users\julid\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\julid\.m2\repository\org\springframework\spring-context-support\6.1.4\spring-context-support-6.1.4.jar;C:\Users\julid\.m2\repository\org\eclipse\angus\jakarta.mail\2.0.2\jakarta.mail-2.0.2.jar;C:\Users\julid\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.2\jakarta.activation-api-2.1.2.jar;C:\Users\julid\.m2\repository\org\eclipse\angus\angus-activation\2.0.1\angus-activation-2.0.1.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.2.3\spring-boot-starter-security-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\spring-aop\6.1.4\spring-aop-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\security\spring-security-config\6.2.2\spring-security-config-6.2.2.jar;C:\Users\julid\.m2\repository\org\springframework\security\spring-security-web\6.2.2\spring-security-web-6.2.2.jar;C:\Users\julid\.m2\repository\org\springframework\spring-expression\6.1.4\spring-expression-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\3.2.3\spring-boot-starter-thymeleaf-3.2.3.jar;C:\Users\julid\.m2\repository\org\thymeleaf\thymeleaf-spring6\3.1.2.RELEASE\thymeleaf-spring6-3.1.2.RELEASE.jar;C:\Users\julid\.m2\repository\org\thymeleaf\thymeleaf\3.1.2.RELEASE\thymeleaf-3.1.2.RELEASE.jar;C:\Users\julid\.m2\repository\org\attoparser\attoparser\2.0.7.RELEASE\attoparser-2.0.7.RELEASE.jar;C:\Users\julid\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.2.3\spring-boot-starter-web-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.2.3\spring-boot-starter-json-3.2.3.jar;C:\Users\julid\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.4\jackson-databind-2.15.4.jar;C:\Users\julid\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.4\jackson-annotations-2.15.4.jar;C:\Users\julid\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.4\jackson-core-2.15.4.jar;C:\Users\julid\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.4\jackson-datatype-jdk8-2.15.4.jar;C:\Users\julid\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.4\jackson-datatype-jsr310-2.15.4.jar;C:\Users\julid\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.4\jackson-module-parameter-names-2.15.4.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.2.3\spring-boot-starter-tomcat-3.2.3.jar;C:\Users\julid\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.19\tomcat-embed-core-10.1.19.jar;C:\Users\julid\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.19\tomcat-embed-websocket-10.1.19.jar;C:\Users\julid\.m2\repository\org\springframework\spring-web\6.1.4\spring-web-6.1.4.jar;C:\Users\julid\.m2\repository\io\micrometer\micrometer-observation\1.12.3\micrometer-observation-1.12.3.jar;C:\Users\julid\.m2\repository\io\micrometer\micrometer-commons\1.12.3\micrometer-commons-1.12.3.jar;C:\Users\julid\.m2\repository\org\springframework\spring-webmvc\6.1.4\spring-webmvc-6.1.4.jar;C:\Users\julid\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity6\3.1.2.RELEASE\thymeleaf-extras-springsecurity6-3.1.2.RELEASE.jar;C:\Users\julid\.m2\repository\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-devtools\3.2.3\spring-boot-devtools-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot\3.2.3\spring-boot-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.2.3\spring-boot-autoconfigure-3.2.3.jar;C:\Users\julid\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\julid\.m2\repository\org\projectlombok\lombok\1.18.30\lombok-1.18.30.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.2.3\spring-boot-starter-test-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-test\3.2.3\spring-boot-test-3.2.3.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.2.3\spring-boot-test-autoconfigure-3.2.3.jar;C:\Users\julid\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\julid\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.1\jakarta.xml.bind-api-4.0.1.jar;C:\Users\julid\.m2\repository\net\minidev\json-smart\2.5.0\json-smart-2.5.0.jar;C:\Users\julid\.m2\repository\net\minidev\accessors-smart\2.5.0\accessors-smart-2.5.0.jar;C:\Users\julid\.m2\repository\org\ow2\asm\asm\9.3\asm-9.3.jar;C:\Users\julid\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\julid\.m2\repository\org\awaitility\awaitility\4.2.0\awaitility-4.2.0.jar;C:\Users\julid\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\julid\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\julid\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\julid\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\julid\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\julid\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\julid\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\julid\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\julid\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\julid\.m2\repository\org\mockito\mockito-core\5.7.0\mockito-core-5.7.0.jar;C:\Users\julid\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar;C:\Users\julid\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\julid\.m2\repository\org\mockito\mockito-junit-jupiter\5.7.0\mockito-junit-jupiter-5.7.0.jar;C:\Users\julid\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\julid\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\julid\.m2\repository\org\springframework\spring-core\6.1.4\spring-core-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\spring-jcl\6.1.4\spring-jcl-6.1.4.jar;C:\Users\julid\.m2\repository\org\springframework\spring-test\6.1.4\spring-test-6.1.4.jar;C:\Users\julid\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\julid\.m2\repository\org\springframework\security\spring-security-test\6.2.2\spring-security-test-6.2.2.jar;C:\Users\julid\.m2\repository\org\springframework\security\spring-security-core\6.2.2\spring-security-core-6.2.2.jar;C:\Users\julid\.m2\repository\org\springframework\security\spring-security-crypto\6.2.2\spring-security-crypto-6.2.2.jar;C:\Users\julid\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.2.3\spring-boot-starter-validation-3.2.3.jar;C:\Users\julid\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.19\tomcat-embed-el-10.1.19.jar;C:\Users\julid\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\julid\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="windows-1252"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\julid\AppData\Local\Temp\surefire3885989855501301761\surefirebooter-20240427151225708_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\julid\AppData\Local\Temp\surefire15509296894672645901\surefirebooter-20240429135645943_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.8+9-LTS-211"/>
@@ -51,7 +51,7 @@
     <property name="user.dir" value="C:\Users\julid\OneDrive\Escritorio\Agencia Turismo con Spring\agencia-de-turismo"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="17532"/>
+    <property name="PID" value="6848"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="windows-1252"/>
     <property name="native.encoding" value="Cp1252"/>
@@ -63,10 +63,10 @@
     <property name="java.class.version" value="61.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[agencia-de-turismo] "/>
   </properties>
-  <testcase name="contextLoads" classname="com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests" time="0.695">
-    <system-out><![CDATA[15:12:26.947 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests]: AgenciaDeTurismoApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-15:12:27.152 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplication for test class com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests
-15:12:27.476 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+  <testcase name="contextLoads" classname="com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests" time="0.637">
+    <system-out><![CDATA[13:56:46.995 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests]: AgenciaDeTurismoApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:56:47.123 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplication for test class com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplicationTests
+13:56:47.328 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -76,33 +76,32 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.3)
 
-2024-04-27T15:12:27.952-03:00  INFO 17532 --- [agencia-de-turismo] [           main] c.e.a.AgenciaDeTurismoApplicationTests   : Starting AgenciaDeTurismoApplicationTests using Java 17.0.8 with PID 17532 (started by julid in C:\Users\julid\OneDrive\Escritorio\Agencia Turismo con Spring\agencia-de-turismo)
-2024-04-27T15:12:27.953-03:00  INFO 17532 --- [agencia-de-turismo] [           main] c.e.a.AgenciaDeTurismoApplicationTests   : No active profile set, falling back to 1 default profile: "default"
-2024-04-27T15:12:27.953-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.s.boot.SpringApplication               : Loading source class com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplication
-2024-04-27T15:12:28.005-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@88d6f9b
-2024-04-27T15:12:29.208-03:00  INFO 17532 --- [agencia-de-turismo] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-04-27T15:12:29.239-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.s.b.a.AutoConfigurationPackages        : @EnableAutoConfiguration was declared on a class in the package 'com.empresaTurismo.agenciadeturismo'. Automatic @Repository and @Entity scanning is enabled.
-2024-04-27T15:12:29.322-03:00  INFO 17532 --- [agencia-de-turismo] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 102 ms. Found 5 JPA repository interfaces.
-2024-04-27T15:12:30.135-03:00  INFO 17532 --- [agencia-de-turismo] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-04-27T15:12:30.249-03:00  INFO 17532 --- [agencia-de-turismo] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
-2024-04-27T15:12:30.318-03:00  INFO 17532 --- [agencia-de-turismo] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-04-27T15:12:30.836-03:00  INFO 17532 --- [agencia-de-turismo] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-04-27T15:12:30.885-03:00  INFO 17532 --- [agencia-de-turismo] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-04-27T15:12:31.146-03:00  INFO 17532 --- [agencia-de-turismo] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58b97c15
-2024-04-27T15:12:31.148-03:00  INFO 17532 --- [agencia-de-turismo] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-04-27T15:12:31.173-03:00  WARN 17532 --- [agencia-de-turismo] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-04-27T15:12:31.182-03:00  WARN 17532 --- [agencia-de-turismo] [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@194b9783) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@45297e7)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4dd1548e) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@54bb1194)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1109730f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1f42366)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@46c662f2) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4afdfc0f)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@10b67f54) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@30798137)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@455da438) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@60652518)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@438aaa9f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3f06ebe0)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1752e45c) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5ed65e4b)
-2024-04-27T15:12:31.223-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@481ed95c) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@40cf6254)
-2024-04-27T15:12:32.748-03:00  INFO 17532 --- [agencia-de-turismo] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-04-27T15:12:32.815-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:47.629-03:00  INFO 6848 --- [agencia-de-turismo] [           main] c.e.a.AgenciaDeTurismoApplicationTests   : Starting AgenciaDeTurismoApplicationTests using Java 17.0.8 with PID 6848 (started by julid in C:\Users\julid\OneDrive\Escritorio\Agencia Turismo con Spring\agencia-de-turismo)
+2024-04-29T13:56:47.629-03:00  INFO 6848 --- [agencia-de-turismo] [           main] c.e.a.AgenciaDeTurismoApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2024-04-29T13:56:47.629-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.s.boot.SpringApplication               : Loading source class com.empresaTurismo.agenciadeturismo.AgenciaDeTurismoApplication
+2024-04-29T13:56:47.677-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@88d6f9b
+2024-04-29T13:56:48.707-03:00  INFO 6848 --- [agencia-de-turismo] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-04-29T13:56:48.725-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.s.b.a.AutoConfigurationPackages        : @EnableAutoConfiguration was declared on a class in the package 'com.empresaTurismo.agenciadeturismo'. Automatic @Repository and @Entity scanning is enabled.
+2024-04-29T13:56:48.791-03:00  INFO 6848 --- [agencia-de-turismo] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 5 JPA repository interfaces.
+2024-04-29T13:56:49.356-03:00  INFO 6848 --- [agencia-de-turismo] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-04-29T13:56:49.479-03:00  INFO 6848 --- [agencia-de-turismo] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-04-29T13:56:49.537-03:00  INFO 6848 --- [agencia-de-turismo] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-04-29T13:56:49.891-03:00  INFO 6848 --- [agencia-de-turismo] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-04-29T13:56:49.924-03:00  INFO 6848 --- [agencia-de-turismo] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-04-29T13:56:52.885-03:00  INFO 6848 --- [agencia-de-turismo] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@553ce348
+2024-04-29T13:56:52.893-03:00  INFO 6848 --- [agencia-de-turismo] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-04-29T13:56:53.436-03:00  WARN 6848 --- [agencia-de-turismo] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(12, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@e49437) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7645b7d)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-9, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4c50cd7d) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3ea84e01)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(-3, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1a4930cf) replaced previous registration(org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3fd33f48)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@75a226ea) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@986b619)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@5a1a20ae) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@7c956dda)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@186481d4) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@24eecabf)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@2ffa91dc) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@78d6c244)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@448086ab) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@16e907b6)
+2024-04-29T13:56:53.476-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@6de610c6) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@23ec2bdc)
+2024-04-29T13:56:54.603-03:00  INFO 6848 --- [agencia-de-turismo] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-04-29T13:56:55.302-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table imagen (
         id bigint not null,
         mime varchar(255),
@@ -122,7 +121,7 @@ Hibernate:
         servicio_codigo_servicio bigint,
         primary key (id)
     ) engine=InnoDB
-2024-04-27T15:12:32.831-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:55.760-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table imagen_seq (
         next_val bigint
     ) engine=InnoDB
@@ -130,11 +129,11 @@ Hibernate:
     create table imagen_seq (
         next_val bigint
     ) engine=InnoDB
-2024-04-27T15:12:32.845-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:56.214-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     insert into imagen_seq values ( 1 )
 Hibernate: 
     insert into imagen_seq values ( 1 )
-2024-04-27T15:12:32.847-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:56.627-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table paquete (
         codigo_paquete bigint not null,
         costo_paquete float(53),
@@ -146,7 +145,7 @@ Hibernate:
         costo_paquete float(53),
         primary key (codigo_paquete)
     ) engine=InnoDB
-2024-04-27T15:12:32.853-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:57.063-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table paquete_seq (
         next_val bigint
     ) engine=InnoDB
@@ -154,11 +153,11 @@ Hibernate:
     create table paquete_seq (
         next_val bigint
     ) engine=InnoDB
-2024-04-27T15:12:32.857-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:57.512-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     insert into paquete_seq values ( 1 )
 Hibernate: 
     insert into paquete_seq values ( 1 )
-2024-04-27T15:12:32.860-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:57.931-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table paquete_servicio (
         paquete_id bigint not null,
         servicio_id bigint not null
@@ -168,7 +167,7 @@ Hibernate:
         paquete_id bigint not null,
         servicio_id bigint not null
     ) engine=InnoDB
-2024-04-27T15:12:32.867-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:58.371-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table servicio (
         codigo_servicio bigint not null,
         cantidad integer,
@@ -198,7 +197,7 @@ Hibernate:
         vendedor_id_usuario bigint,
         primary key (codigo_servicio)
     ) engine=InnoDB
-2024-04-27T15:12:32.873-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:58.812-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table servicio_seq (
         next_val bigint
     ) engine=InnoDB
@@ -206,11 +205,11 @@ Hibernate:
     create table servicio_seq (
         next_val bigint
     ) engine=InnoDB
-2024-04-27T15:12:32.878-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:59.261-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     insert into servicio_seq values ( 1 )
 Hibernate: 
     insert into servicio_seq values ( 1 )
-2024-04-27T15:12:32.881-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:56:59.674-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table usuario (
         id_usuario bigint not null,
         apellido varchar(255),
@@ -246,7 +245,7 @@ Hibernate:
         sueldo float(53),
         primary key (id_usuario)
     ) engine=InnoDB
-2024-04-27T15:12:32.888-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:00.117-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table usuario_seq (
         next_val bigint
     ) engine=InnoDB
@@ -254,11 +253,11 @@ Hibernate:
     create table usuario_seq (
         next_val bigint
     ) engine=InnoDB
-2024-04-27T15:12:32.894-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:00.546-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     insert into usuario_seq values ( 1 )
 Hibernate: 
     insert into usuario_seq values ( 1 )
-2024-04-27T15:12:32.897-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:00.960-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table venta (
         num_venta bigint not null,
         comision float(53),
@@ -280,7 +279,7 @@ Hibernate:
         servicio_codigo_servicio bigint,
         primary key (num_venta)
     ) engine=InnoDB
-2024-04-27T15:12:32.903-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:01.402-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table venta_seq (
         next_val bigint
     ) engine=InnoDB
@@ -288,11 +287,11 @@ Hibernate:
     create table venta_seq (
         next_val bigint
     ) engine=InnoDB
-2024-04-27T15:12:32.907-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:01.847-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     insert into venta_seq values ( 1 )
 Hibernate: 
     insert into venta_seq values ( 1 )
-2024-04-27T15:12:32.912-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:02.263-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     create table venta_usuario (
         venta_num_venta bigint not null,
         usuario_id_usuario bigint not null
@@ -302,7 +301,7 @@ Hibernate:
         venta_num_venta bigint not null,
         usuario_id_usuario bigint not null
     ) engine=InnoDB
-2024-04-27T15:12:32.918-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:02.708-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table imagen 
        add constraint FKeaxytjm5tfl1kranquibixtfa 
        foreign key (servicio_codigo_servicio) 
@@ -312,7 +311,7 @@ Hibernate:
        add constraint FKeaxytjm5tfl1kranquibixtfa 
        foreign key (servicio_codigo_servicio) 
        references servicio (codigo_servicio)
-2024-04-27T15:12:32.957-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:03.231-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table paquete_servicio 
        add constraint FK3af4h2hswfl31xxwguhctoqe8 
        foreign key (servicio_id) 
@@ -322,7 +321,7 @@ Hibernate:
        add constraint FK3af4h2hswfl31xxwguhctoqe8 
        foreign key (servicio_id) 
        references servicio (codigo_servicio)
-2024-04-27T15:12:33.006-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:03.700-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table paquete_servicio 
        add constraint FK4hqv2i3lo5x9618ekby4ry3rb 
        foreign key (paquete_id) 
@@ -332,7 +331,7 @@ Hibernate:
        add constraint FK4hqv2i3lo5x9618ekby4ry3rb 
        foreign key (paquete_id) 
        references paquete (codigo_paquete)
-2024-04-27T15:12:33.058-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:05.498-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table servicio 
        add constraint FKlsg2p8p287wobqgovm636otqg 
        foreign key (vendedor_id_usuario) 
@@ -342,7 +341,7 @@ Hibernate:
        add constraint FKlsg2p8p287wobqgovm636otqg 
        foreign key (vendedor_id_usuario) 
        references usuario (id_usuario)
-2024-04-27T15:12:33.091-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:05.994-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table venta 
        add constraint FKlilqaluft8ma0vxcp50b28vmo 
        foreign key (paquete_turistico_codigo_paquete) 
@@ -352,7 +351,7 @@ Hibernate:
        add constraint FKlilqaluft8ma0vxcp50b28vmo 
        foreign key (paquete_turistico_codigo_paquete) 
        references paquete (codigo_paquete)
-2024-04-27T15:12:33.139-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:06.453-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table venta 
        add constraint FKppq8c162wo7nqxjq84k2m5v5o 
        foreign key (servicio_codigo_servicio) 
@@ -362,7 +361,7 @@ Hibernate:
        add constraint FKppq8c162wo7nqxjq84k2m5v5o 
        foreign key (servicio_codigo_servicio) 
        references servicio (codigo_servicio)
-2024-04-27T15:12:33.195-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:06.966-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table venta_usuario 
        add constraint FKgpm4sbxo8jty7h5tmnm9g39i8 
        foreign key (usuario_id_usuario) 
@@ -372,7 +371,7 @@ Hibernate:
        add constraint FKgpm4sbxo8jty7h5tmnm9g39i8 
        foreign key (usuario_id_usuario) 
        references usuario (id_usuario)
-2024-04-27T15:12:33.233-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
+2024-04-29T13:57:07.442-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] org.hibernate.SQL                        : 
     alter table venta_usuario 
        add constraint FKfss92nols5g9wdbaxjfl08v0t 
        foreign key (venta_num_venta) 
@@ -382,16 +381,16 @@ Hibernate:
        add constraint FKfss92nols5g9wdbaxjfl08v0t 
        foreign key (venta_num_venta) 
        references venta (num_venta)
-2024-04-27T15:12:33.279-03:00  INFO 17532 --- [agencia-de-turismo] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-04-27T15:12:33.712-03:00  INFO 17532 --- [agencia-de-turismo] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2024-04-27T15:12:34.554-03:00  WARN 17532 --- [agencia-de-turismo] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-04-27T15:12:34.703-03:00  INFO 17532 --- [agencia-de-turismo] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2024-04-27T15:12:34.827-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 32 mappings in 'requestMappingHandlerMapping'
-2024-04-27T15:12:34.984-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2024-04-27T15:12:35.050-03:00  INFO 17532 --- [agencia-de-turismo] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@9223122, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3c2b7322, org.springframework.security.web.context.SecurityContextHolderFilter@67bf393c, org.springframework.security.web.header.HeaderWriterFilter@76334a3a, org.springframework.web.filter.CorsFilter@7731504, org.springframework.security.web.authentication.logout.LogoutFilter@42bb0492, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@fb69ab1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@19d85bbe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c6f91d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@43c25e89, org.springframework.security.web.access.ExceptionTranslationFilter@74876292, org.springframework.security.web.access.intercept.AuthorizationFilter@248227db]
-2024-04-27T15:12:35.280-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2024-04-27T15:12:35.313-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2024-04-27T15:12:35.512-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+2024-04-29T13:57:07.933-03:00  INFO 6848 --- [agencia-de-turismo] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-04-29T13:57:08.368-03:00  INFO 6848 --- [agencia-de-turismo] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-04-29T13:57:09.050-03:00  WARN 6848 --- [agencia-de-turismo] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-04-29T13:57:09.172-03:00  INFO 6848 --- [agencia-de-turismo] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-04-29T13:57:09.273-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 32 mappings in 'requestMappingHandlerMapping'
+2024-04-29T13:57:09.427-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-04-29T13:57:09.478-03:00  INFO 6848 --- [agencia-de-turismo] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@27131d01, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@15c27b65, org.springframework.security.web.context.SecurityContextHolderFilter@5aeb2c8a, org.springframework.security.web.header.HeaderWriterFilter@7bb50de0, org.springframework.web.filter.CorsFilter@106a6420, org.springframework.security.web.authentication.logout.LogoutFilter@6e245068, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7fef485d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@472073bb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@63714a1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60a54ad2, org.springframework.security.web.access.ExceptionTranslationFilter@496101d1, org.springframework.security.web.access.intercept.AuthorizationFilter@4baf3987]
+2024-04-29T13:57:09.679-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-04-29T13:57:09.724-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-04-29T13:57:09.886-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 
 ============================
@@ -982,7 +981,7 @@ Negative matches:
 
    ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration:
       Did not match:
-         - ErrorTemplate Missing found template from org.springframework.boot.autoconfigure.thymeleaf.ThymeleafTemplateAvailabilityProvider@67c277a0 (ErrorMvcAutoConfiguration.ErrorTemplateMissingCondition)
+         - ErrorTemplate Missing found template from org.springframework.boot.autoconfigure.thymeleaf.ThymeleafTemplateAvailabilityProvider@6818d900 (ErrorMvcAutoConfiguration.ErrorTemplateMissingCondition)
       Matched:
          - @ConditionalOnProperty (server.error.whitelabel.enabled) matched (OnPropertyCondition)
 
@@ -1569,10 +1568,10 @@ Unconditional classes:
 
 
 
-2024-04-27T15:12:35.519-03:00  INFO 17532 --- [agencia-de-turismo] [           main] c.e.a.AgenciaDeTurismoApplicationTests   : Started AgenciaDeTurismoApplicationTests in 8.068 seconds (process running for 9.625)
-2024-04-27T15:12:35.519-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.s.b.a.ApplicationAvailabilityBean      : Application availability state LivenessState changed to CORRECT
-2024-04-27T15:12:35.525-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.s.boot.devtools.restart.Restarter      : Creating new Restarter for thread Thread[main,5,main]
-2024-04-27T15:12:35.526-03:00 DEBUG 17532 --- [agencia-de-turismo] [           main] o.s.b.a.ApplicationAvailabilityBean      : Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2024-04-29T13:57:09.891-03:00  INFO 6848 --- [agencia-de-turismo] [           main] c.e.a.AgenciaDeTurismoApplicationTests   : Started AgenciaDeTurismoApplicationTests in 22.579 seconds (process running for 23.772)
+2024-04-29T13:57:09.893-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.s.b.a.ApplicationAvailabilityBean      : Application availability state LivenessState changed to CORRECT
+2024-04-29T13:57:09.897-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.s.boot.devtools.restart.Restarter      : Creating new Restarter for thread Thread[main,5,main]
+2024-04-29T13:57:09.898-03:00 DEBUG 6848 --- [agencia-de-turismo] [           main] o.s.b.a.ApplicationAvailabilityBean      : Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
 ]]></system-out>
   </testcase>
 </testsuite>
