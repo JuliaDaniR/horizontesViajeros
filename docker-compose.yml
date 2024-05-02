@@ -1,28 +1,33 @@
-version: "3.9"
+version: '3'
 
 services:
-  mysqldb:
-    image: mysql:5.7
-    restart: unless-stopped
+  app_turismo:
+    container_name: "sbcontainer"
+    build: .
+    ports:
+      - "8080:8080"
     environment:
-      MYSQL_ROOT_PASSWORD: "gzUDhXmzaxqoeoYFvgJqZcmEZSZLmLGV"  
-      MYSQL_DATABASE: "railway"
-    ports:
-      - "3307:3306"  
-    volumes:
-      - db:/var/lib/mysql
-
-  app:
+      DB_URL: jdbc:mysql://agencia_bd:3306/agencia_turismo?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: root
+    restart: always
     depends_on:
-      - mysqldb
-    build: ./
-    restart: on-failure
+      - agencia_bd
+
+  agencia_bd:
+    container_name: "agencia_db"
+    image: mysql:8.3.0
     ports:
-      - "6868:8080"  
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: agencia_turismo
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
 
 volumes:
-  db:
+    mysql-data:

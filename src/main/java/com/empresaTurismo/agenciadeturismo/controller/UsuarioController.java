@@ -154,8 +154,11 @@ public class UsuarioController {
             @RequestParam(required = false) Boolean estado,
             ModelMap modelo, HttpSession session,
             RedirectAttributes redirectAttrs) {
-
+        
+        System.out.println("**********rol" + rol);
+            System.out.println("**********estado" +estado);
         try {
+    
             usuService.modificarUsuario(id_usuario, nombre, apellido, direccion, dni, fecha_nac,
                     nacionalidad, celular, email, cargo, sueldo, rol, password, estado);
             redirectAttrs.addFlashAttribute("exito", "El usuario se modificó correctamente");
