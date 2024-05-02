@@ -37,7 +37,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="exampleInputPassword1" class="form-label"
+                            <label for="dni" class="form-label"
                                    >Ingresa tu DNI</label
                             >
                             <input
@@ -45,12 +45,13 @@
                                 class="form-control"
                                 placeholder="Número de Documento"
                                 name="dni"
+                                id="dni"
                                 th:value="${dni}"
                                 />
 
                         </div>
                         <div class="col-md-6">
-                            <label for="exampleInputPassword1" class="form-label"
+                            <label for="celular" class="form-label"
                                    >Ingresa tu teléfono</label
                             >
                             <input
@@ -58,6 +59,7 @@
                                 class="form-control"
                                 placeholder="Teléfono"
                                 name="celular"
+                                id="celular"
                                 th:value="${celular}"
                                 />
 
@@ -70,7 +72,7 @@
                                 type="date"
                                 class="form-control"
                                 placeholder="Fecha de nacimiento"
-                                id="nombre"
+                                id="fecha_nac"
                                 name="fecha_nac"
                                 th:value="${fecha_nac}"
                                 />
@@ -84,6 +86,7 @@
                                 class="form-control"
                                 placeholder="Nacionalidad"
                                 name="nacionalidad"
+                                id="nacionalidad"
                                 th:value="${nacionalidad}"
                                 />
                         </div>
@@ -95,7 +98,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Direccion"
-                                id="nombre"
+                                id="direccion"
                                 name="direccion"
                                 th:value="${direccion}"
                                 />
@@ -117,7 +120,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label for="exampleInputPassword1" class="form-label"
+                            <label for="password1" class="form-label"
                                    >Ingresa tu contraseña</label
                             >
                             <input
@@ -125,11 +128,12 @@
                                 class="form-control"
                                 placeholder="Ingresa la Contraseña"
                                 name="password"
+                                id="password1"
                                 th:value="${password}"
                                 />
                         </div>
                         <div class="col-md-6">
-                            <label for="exampleInputPassword1" class="form-label"
+                            <label for="password2" class="form-label"
                                    >Repita la contraseña</label
                             >
                             <input
@@ -137,6 +141,7 @@
                                 class="form-control"
                                 placeholder="Repite Contraseña"
                                 name="password2"
+                                id="password2"
                                 th:value="${password2}"
                                 />
                         </div>
@@ -162,7 +167,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Cargo"
-                                id="nombre"
+                                id="cargo"
                                 name="cargo"
                                 th:value="${cargo}"
                                 />
@@ -176,6 +181,7 @@
                                 class="form-control"
                                 placeholder="Sueldo"
                                 name="sueldo"
+                                id="sueldo"
                                 th:value="${sueldo}"
                                 />
                         </div>

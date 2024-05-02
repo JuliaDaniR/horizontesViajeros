@@ -77,7 +77,7 @@
                             </div>
                             <div class="row mb-3" sec:authorize="hasAnyRole('ROLE_ADMIN')">
                                 <div class="col-md-6">
-                                    <label for="exampleInputPassword1" class="form-label">Rol</label>
+                                    <label for="selectRol" class="form-label">Rol</label>
                                     <select name="rol" id="selectRol" class='form-select' th:field="*{rol}">
                                         <option value="">Seleccionar rol</option>
                                         <option th:each="rolAelegir : ${roles}"
