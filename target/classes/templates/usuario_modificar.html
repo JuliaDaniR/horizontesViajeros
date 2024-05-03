@@ -1,120 +1,210 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace = "~{/fragments/head :: head}"></head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+            />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400;700&display=swap"
+            rel="stylesheet"
+            />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+        <title>Horizontes Viajeros</title>
+    </head>
     <body style="background-image: url('/image/informacionUsuario.jpg'); background-size: cover; background-position: bottom; background-repeat: no-repeat">
         <header class="contenedor-header-formulario">
-            <nav th:replace = "~{/fragments/navbar :: nav}"></nav>
-        </header>
-            <main class="container mt-5" style='padding-top: 10rem'>
+            <nav class="navegacion">
 
-                <div class='row justify-content-center'>
+                <span class="textColor">
+                    <a th:href="@{/}" class="cursor-pointer" style="text-decoration: none">
+                        Horizontes Viajeros
+                    </a>
+                </span>
 
-                    <div class="bodyForm-registrar" style="width: 60%; border: 2px double black">
-                        <div th:replace = "~{/fragments/modelo :: div}"></div>
+                <div class="enlaces">
+                    <input type="checkbox" id="check"/>
+                    <label for="check" class="checkbtn">
+                        <i class="fas fa-bars" style="font-weight: 900; margin-left: 1rem;"></i>
+                    </label>
+                    <a th:if="${session.usuariosession == null}" th:href="@{/login}" class="botonLink">Ingresar</a>
+                    <a th:if="${session.usuariosession == null}" th:href="@{/usuario/registrar}" class="botonLink">Registrarse</a>
+                    <a href="#contacto" th:if="${session.usuariosession == null}">Contacto</a>
 
-                        <h2 class="text-center mb-5">Perfil Usuario</h2>
-
-                        <form class="form-group" th:action="@{/usuario/modificar}" th:object="${usuario}" method="POST" enctype="multipart/form-data">
-
-                            <input type="hidden" th:field="*{id_usuario}" name="id_usuario">
-                            <input type="hidden" th:field="*{password}" name="password">
-                            <input type="hidden" th:field="*{rol}" sec:authorize="!hasAnyRole('ADMIN')"/>
-                            <input type="hidden" th:field="*{estado}" sec:authorize="!hasAnyRole('ADMIN')"/>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="nombre" class="form-label">Ingresa tu nombre</label>
-                                    <input type="text" class="form-control" placeholder="Nombre" id="nombre" th:field="*{nombre}" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="apellido" class="form-label">Ingresa tu apellido</label>
-                                    <input type="text" class="form-control" placeholder="Apellido" id="apellido" th:field="*{apellido}" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="dni" class="form-label">Ingresa tu DNI</label>
-                                    <input type="number" class="form-control" placeholder="Número de Documento" id="dni" th:field="*{dni}" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="celular" class="form-label">Ingresa tu teléfono</label>
-                                    <input type="number" class="form-control" placeholder="Teléfono" id="celular" th:field="*{celular}" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="fecha_nac" class="form-label">Ingresa tu fecha de nacimiento</label>
-                                    <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha_nac" th:field="*{fecha_nac}" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="nacionalidad" class="form-label">Ingrese su nacionalidad</label>
-                                    <input type="text" class="form-control" placeholder="Nacionalidad" id="nacionalidad" th:field="*{nacionalidad}" />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="direccion" class="form-label">Ingresa tu dirección</label>
-                                    <input type="text" class="form-control" placeholder="Dirección" id="direccion" th:field="*{direccion}" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label">Ingresa tu E-mail</label>
-                                    <input type="email" class="form-control" placeholder="E-mail" id="email" th:field="*{email}" />
-                                </div>
-                            </div>
-                            <div class="row mb-3" sec:authorize="hasAnyRole('ROLE_VENDEDOR','ROLE_ADMIN')">
-                                <div class="col-md-6">
-                                    <label for="cargo" class="form-label">Ingresa tu cargo</label>
-                                    <input type="text" class="form-control" placeholder="Cargo" id="cargo" th:field="*{cargo}" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="sueldo" class="form-label">Ingresa tu sueldo</label>
-                                    <input type="text" class="form-control" placeholder="Sueldo" id="sueldo" th:field="*{sueldo}" />
-                                </div>
-                            </div>
-                            <div class="row mb-3" sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                                <div class="col-md-6">
-                                    <label for="selectRol" class="form-label">Rol</label>
-                                    <select name="rol" id="selectRol" class='form-select' th:field="*{rol}">
-                                        <option value="">Seleccionar rol</option>
-                                        <option th:each="rolAelegir : ${roles}"
-                                                th:value="${rolAelegir}"
-                                                th:selected="${usuario.rol == rolAelegir}"
-                                                th:text="${rolAelegir}"></option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="check-estado" style="width: 60%">
-                                        <label for="estado">El Usuario está dado de <span th:text="${usuario.estado ? 'Alta' : 'Baja'}"></span></label><br>
-                                        <input type="checkbox" id="estado" class="mi-check" th:field="*{estado}" />
-                                        <span>Modificar Estado</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center">
-                                <div>
-                                    <button type="submit" class="btn"  style="
-                                            background: #c17108;
-                                            padding: 0.3rem 2rem;
-                                            text-align: center;
-                                            text-decoration: none;
-                                            color: white;
-                                            margin-top: 1rem;
-                                            border: 2px solid #d51a1af1;
-                                            border-radius: 10px;">Actualizar</button>
-                                </div>
-                                <div>
-                                    <a th:href="@{/}" class="btn" style="background: black; margin: 2rem auto; color: white;text-decoration: none; padding: .3rem; font-size: 1.2rem">Volver</a>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="enlaces-otro" th:if="${session.usuariosession != null}">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Servicios
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <li><a  class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/usuario/reporteVentas/__${session.usuariosession.id_usuario}__}">Reporte</a></li>
+                            <li><a  class="dropdown-item" th:href="@{/servicio/listar/__${session.usuariosession.id_usuario}__}" >Ver Servicios</a></li>
+                        </ul>
+                        <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ROLE_CLIENTE')" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Carrito
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                            <li><a  class="dropdown-item"  th:href="@{/venta/carritoDetalle}" >Compra</a></li>
+                        </ul>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Perfil
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                            <li><a  class="dropdown-item" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/usuario/listar}" >Ver Usuarios</a></li>
+                            <li><a  class="dropdown-item" th:href="@{/usuario/modificar/__${session.usuariosession.id_usuario}__}" >Información</a></li>
+                            <li><a  class="dropdown-item" th:href="@{/logout}" >Cerrar Sesión</a></li>
+                        </ul>
                     </div>
                 </div>
-            </main>
-        <footer th:replace = "/fragments/footer2 :: footer"></footer>
+            </nav>
+        </header>
+        <main class="container mt-5" style='padding-top: 10rem'>
+
+            <div class='row justify-content-center'>
+
+                <div class="bodyForm-registrar" style="width: 60%; border: 2px double black">
+                    <div class="container-modelo" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${error != null}" class="error">
+        <div class="card-body">  
+            <h4 class="card-title">Error 👎</h4>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+    <div th:if="${exito != null}" class="exito">
+        <div class="card-body">  
+            <h4 class="card-title">Exito 👍</h4>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+</div>
+
+                    <h2 class="text-center mb-5">Perfil Usuario</h2>
+
+                    <form class="form-group" th:action="@{/usuario/modificar}" th:object="${usuario}" method="POST" enctype="multipart/form-data">
+
+                        <input type="hidden" th:field="*{id_usuario}" name="id_usuario">
+                        <input type="hidden" th:field="*{password}" name="password">
+                        <input type="hidden" th:field="*{rol}" sec:authorize="!hasAnyRole('ADMIN')"/>
+                        <input type="hidden" th:field="*{estado}" sec:authorize="!hasAnyRole('ADMIN')"/>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label">Ingresa tu nombre</label>
+                                <input type="text" class="form-control" placeholder="Nombre" id="nombre" th:field="*{nombre}" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="apellido" class="form-label">Ingresa tu apellido</label>
+                                <input type="text" class="form-control" placeholder="Apellido" id="apellido" th:field="*{apellido}" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="dni" class="form-label">Ingresa tu DNI</label>
+                                <input type="number" class="form-control" placeholder="Número de Documento" id="dni" th:field="*{dni}" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="celular" class="form-label">Ingresa tu teléfono</label>
+                                <input type="number" class="form-control" placeholder="Teléfono" id="celular" th:field="*{celular}" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="fecha_nac" class="form-label">Ingresa tu fecha de nacimiento</label>
+                                <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha_nac" th:field="*{fecha_nac}" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nacionalidad" class="form-label">Ingrese su nacionalidad</label>
+                                <input type="text" class="form-control" placeholder="Nacionalidad" id="nacionalidad" th:field="*{nacionalidad}" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="direccion" class="form-label">Ingresa tu dirección</label>
+                                <input type="text" class="form-control" placeholder="Dirección" id="direccion" th:field="*{direccion}" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Ingresa tu E-mail</label>
+                                <input type="email" class="form-control" placeholder="E-mail" id="email" th:field="*{email}" />
+                            </div>
+                        </div>
+                        <div class="row mb-3" sec:authorize="hasAnyRole('ROLE_VENDEDOR','ROLE_ADMIN')">
+                            <div class="col-md-6">
+                                <label for="cargo" class="form-label">Ingresa tu cargo</label>
+                                <input type="text" class="form-control" placeholder="Cargo" id="cargo" th:field="*{cargo}" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sueldo" class="form-label">Ingresa tu sueldo</label>
+                                <input type="text" class="form-control" placeholder="Sueldo" id="sueldo" th:field="*{sueldo}" />
+                            </div>
+                        </div>
+                        <div class="row mb-3" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                            <div class="col-md-6">
+                                <label for="selectRol" class="form-label">Rol</label>
+                                <select name="rol" id="selectRol" class='form-select' th:field="*{rol}">
+                                    <option value="">Seleccionar rol</option>
+                                    <option th:each="rolAelegir : ${roles}"
+                                            th:value="${rolAelegir}"
+                                            th:selected="${usuario.rol == rolAelegir}"
+                                            th:text="${rolAelegir}"></option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="check-estado" style="width: 60%">
+                                    <label for="estado">El Usuario está dado de <span th:text="${usuario.estado ? 'Alta' : 'Baja'}"></span></label><br>
+                                    <input type="checkbox" id="estado" class="mi-check" th:field="*{estado}" />
+                                    <span>Modificar Estado</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                            <div>
+                                <button type="submit" class="btn"  style="
+                                        background: #c17108;
+                                        padding: 0.3rem 2rem;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        color: white;
+                                        margin-top: 1rem;
+                                        border: 2px solid #d51a1af1;
+                                        border-radius: 10px;">Actualizar</button>
+                            </div>
+                            <div>
+                                <a th:href="@{/}" class="btn" style="background: black; margin: 2rem auto; color: white;text-decoration: none; padding: .3rem; font-size: 1.2rem">Volver</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer id="contacto">
+            <div class="footer">
+                <div class="contain-redes flex gap-x-4">
+                    <i class="bi bi-github" style="font-size: 28px;"></i>
+                    <i class="bi bi-twitter" style="font-size: 28px;"></i>
+                    <i class="bi bi-facebook" style="font-size: 28px;"></i>
+                </div>
+                <div class="mt-4">
+                    <p class="text-[25px] font-bold capitalize">&#9400; copyright - 2024</p>
+                    <small class="mt-1.5 font-semibold">Elaborado por Julia Rodriguez</small>
+                </div>              
+            </div>
+        </footer>
     </body>
 </html>
 

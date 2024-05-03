@@ -108,20 +108,20 @@ public class UsuarioController {
                 return "redirect:/"; // Página de éxito
             } else {
                 redirectAttrs.addFlashAttribute("error", "Debe ser mayor de 18 años para registrarse.");
-                return "registro.html";
+                return "redirect:/";
             }
 
         } catch (ParseException | IllegalArgumentException ex) {
 
             System.out.println("Error al procesar el registro: " + ex.getMessage());
             redirectAttrs.addFlashAttribute("error", "Error al procesar el registro: ");
-            return "registro.html"; // Página de error
+            return "redirect:/"; // Página de error
 
         } catch (MyException ex) {
 
             System.out.println("El usuario no pudo ser registrado " + ex);
             redirectAttrs.addFlashAttribute("error", "El usuario no pudo ser registrado");
-            return "registro.html"; // Página de error
+            return "redirect:/"; // Página de error
         }
     }
 
@@ -154,11 +154,11 @@ public class UsuarioController {
             @RequestParam(required = false) Boolean estado,
             ModelMap modelo, HttpSession session,
             RedirectAttributes redirectAttrs) {
-        
+
         System.out.println("**********rol" + rol);
-            System.out.println("**********estado" +estado);
+        System.out.println("**********estado" + estado);
         try {
-    
+
             usuService.modificarUsuario(id_usuario, nombre, apellido, direccion, dni, fecha_nac,
                     nacionalidad, celular, email, cargo, sueldo, rol, password, estado);
             redirectAttrs.addFlashAttribute("exito", "El usuario se modificó correctamente");
@@ -202,6 +202,8 @@ public class UsuarioController {
 
         Usuario usuario = usuService.buscarUsuario(id);
         List<Venta> listaVentas = ventaService.listarVentas();
+
+        System.out.println("********************usuarioss" + usuario);
 
         List<Venta> ventasTabla = new ArrayList<>();
         Double comisionTotal = 0.0;
@@ -252,11 +254,18 @@ public class UsuarioController {
                 ventasTabla.add(ventaTabla);
             }
         }
+
         Usuario mejorVendedor = ventaService.obtenerMejorVendedor(listaVentas);
 
+        if (mejorVendedor != null) {
+            // Agregar las listas y valores necesarios al modelo
+            model.addAttribute("mejorVendedor", mejorVendedor);
+        } else {
+            // Manejar el caso cuando no hay mejor vendedor
+            model.addAttribute("mensaje", "No hay vendedores disponibles.");
+        }
         // Agregar las listas y valores necesarios al modelo
         model.addAttribute("ventasTabla", ventasTabla);
-        model.addAttribute("mejorVendedor", mejorVendedor);
         model.addAttribute("comisionTotal", comisionTotal);
 
         return "reporte-ventas";

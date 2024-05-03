@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,14 +27,67 @@
         <title>Horizontes Viajeros</title>
     </head>
     <body>
-        <nav th:replace = "~{/fragments/navbar :: nav}"></nav>
+        <nav class="navegacion">
+
+            <span class="textColor">
+                <a th:href="@{/}" class="cursor-pointer" style="text-decoration: none">
+                    Horizontes Viajeros
+                </a>
+            </span>
+
+            <div class="enlaces">
+                <input type="checkbox" id="check"/>
+                <label for="check" class="checkbtn">
+                    <i class="fas fa-bars" style="font-weight: 900; margin-left: 1rem;"></i>
+                </label>
+                <a th:if="${session.usuariosession == null}" th:href="@{/login}" class="botonLink">Ingresar</a>
+                <a th:if="${session.usuariosession == null}" th:href="@{/usuario/registrar}" class="botonLink">Registrarse</a>
+                <a href="#contacto" th:if="${session.usuariosession == null}">Contacto</a>
+
+                <div class="enlaces-otro" th:if="${session.usuariosession != null}">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Servicios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <li><a  class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/usuario/reporteVentas/__${session.usuariosession.id_usuario}__}">Reporte</a></li>
+                        <li><a  class="dropdown-item" th:href="@{/servicio/listar/__${session.usuariosession.id_usuario}__}" >Ver Servicios</a></li>
+                    </ul>
+                    <a class="nav-link dropdown-toggle" sec:authorize="hasRole('ROLE_CLIENTE')" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Carrito
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <li><a  class="dropdown-item"  th:href="@{/venta/carritoDetalle}" >Compra</a></li>
+                    </ul>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                        <li><a  class="dropdown-item" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/usuario/listar}" >Ver Usuarios</a></li>
+                        <li><a  class="dropdown-item" th:href="@{/usuario/modificar/__${session.usuariosession.id_usuario}__}" >Información</a></li>
+                        <li><a  class="dropdown-item" th:href="@{/logout}" >Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <header id="encabezado">
             <div th:each="imagen : ${listaImagenes}" 
                  th:style="'background-image: url(' + ${imagen} + ')'">
             </div>
-            <div th:replace = "~{/fragments/modelo :: div}"></div>
+            <div class="container-modelo">
+                <div th:if="${error != null}" class="error">
+                    <div class="card-body">  
+                        <h4 class="card-title">Error 👎</h4>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+                <div th:if="${exito != null}" class="exito">
+                    <div class="card-body">  
+                        <h4 class="card-title">Exito 👍</h4>
+                        <p class="card-text" th:text="${exito}"></p>
+                    </div>
+                </div>
+            </div>
             <div class="cartel">
-
                 <span class="titulo-cartel text-3xl text-blue-300">Elige tu aventura</span>
                 <span class="texto-cartel text-sm">
                     ¡Descubre nuestras ofertas exclusivas y elige el paquete perfecto
@@ -113,10 +166,112 @@
                     <button id="nextButton" class="btn next">Next</button>
                 </div>
             </div>
-
         </main>
-        <div th:replace = "~{/fragments/publicidad :: div}"></div>
-        <section th:replace = "~{/fragments/section :: section}"></section>
+        <div>
+            <div th:if="${session.usuariosession == null}" class="publicidad">
+                <h1
+                    style="transform: rotate(-6deg)"
+                    >
+                    Encontrá tu próximo destino.
+                    <br /> Regístrate y vivi una experiencia única
+                </h1>
+                <img
+                    src="/image/imagenTurismo.png"
+                    alt=""
+                    class="imagen-publicidad"
+                    />
+            </div>
+            <div th:if="${session.usuariosession != null}" >
+                <div sec:authorize="hasAnyRole('ROLE_CLIENTE')" class="publicidad mx-auto mt-24 mb-24 bg-orange-200 w-[350px] base:w-[768px] md:w-[1024px] lg:w-[1400px] xl:w-[1800px] h-[200px] md:h-[400px] flex justify-around text-center">
+                    <h1
+                        class="my-auto mx-auto text-xl md:text-4xl lg:text-3xl font-bold font-roboto "
+                        style = "transform: rotate(-6deg)"
+                        >
+                        Encontrá tu paquete preferido y ahorra con un 10% de descuento
+                        <br /> Vive una experiencia única
+                    </h1>
+                    <img
+                        src="/image/publicidadLogueado.png"
+                        alt=""
+                        class="imagen-publicidad"
+                        />
+                </div>
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')" class="publicidad mx-auto mt-24 bg-orange-200 w-[350px] base:w-[768px] md:w-[1024px] lg:w-[1400px] xl:w-[1800px] h-[200px] md:h-[400px] flex justify-around text-center">
+                    <h1
+                        style= "transform: rotate(-6deg)"
+                        >
+                        Mejora tus ventas Agregando detalles a tus publicaciones
+                        <br /> Gracias por ser parte de nuestro staff
+                    </h1>
+                    <img
+                        src="/image/publicidadVendedor.png"
+                        alt=""
+                        class="imagen-publicidad"
+                        />
+                </div>
+            </div>
+        </div>
+
+        <section id="section">
+            <h1 class="titulo-main">
+                Los más vendidos
+            </h1>
+            <h3 class="descripcion-main">
+                Explora nuestra selección de servicios turísticos más populares que han encantado a nuestros clientes. Desde la comodidad de los hoteles hasta la emoción de las excursiones y eventos exclusivos, estos son los favoritos que no te puedes perder. Descubre por qué estos servicios son los más solicitados y haz tu reserva hoy mismo para asegurar tu lugar en estas experiencias inolvidables. ¡Prepárate para vivir momentos extraordinarios con nuestros servicios turísticos más vendidos!
+            </h3>
+            <div class="section-cards">
+                <div th:each="servicio, iterStat : ${listaServiciosMasVendidos}" class="card" th:if="${iterStat.index < 5}"> 
+                    <article class="article">
+                        <div class="grow">
+                            <div class="relativa">
+                                <h3 class="text-2xl font-bold font-playfair text-emerald-800 capitalize text-center py-5 cursor-pointer"
+                                    th:text="${servicio.nombre}">
+                                    Servicio Name
+                                </h3>
+                            </div>
+                            <figure th:each="imagen, iterStat :  ${servicio.imagenes}" class="mb-2"  th:if="${iterStat.index < 1}">
+                                <img class="img"
+                                     th:src="${imagen.url}"
+                                     alt="imagen del servicio"
+                                     />
+                            </figure>
+                            <div class="container-btn text-center mt-auto z-10">
+                                <button onclick="showDetails(this)">
+                                    Ver más
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            class="relative hidden">
+                            <div class="p-6 ">
+                                <div class="text-center">
+                                    <h3 class="destino" th:text="'Destino: ' + ${servicio.destino_servicio}"
+                                        >
+                                        Destino
+                                    </h3>
+                                    <p 
+                                        th:text="${servicio.descripcion_breve}"
+                                        >
+                                        Descripción
+                                    </p>
+                                    <p class="costo"
+                                       th:text="'Costo: $' + ${servicio.costo_servicio}"
+                                       >
+                                        Costo
+                                    </p>
+                                </div>
+                                <div class="container-btn">
+                                    <button onclick="hideDetails(this)">
+                                        Ver menos
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
 
         <section id="sectionHome">
             <div class="text-center" style="padding: 1rem">
@@ -146,8 +301,30 @@
                 y comienza a planificar la escapada de tus sueños!
             </h3>
         </div>
-        <footer th:replace = "~{/fragments/footer :: footer}"></footer>
+        <footer id="contacto">
+            <div class="footer">
+                <div class="contain-btn-comentarios">
+                    <button class="btn-comentario" onclick="toggleContactForm()">
+                        <span class="mr-2"><span class="fa fa-comments"></span></span>Comentarios 
+                    </button>
+                </div>
 
+                <div class="contain-redes flex gap-x-4">
+                    <i class="bi bi-github" style="font-size: 28px;"></i>
+                    <i class="bi bi-twitter" style="font-size: 28px;"></i>
+                    <i class="bi bi-facebook" style="font-size: 28px;"></i>
+                </div>
+                <div class="mt-4">
+                    <p class="text-[25px] font-bold capitalize">&#9400; copyright - 2024</p>
+                    <small class="mt-1.5 font-semibold">Elaborado por Julia Rodriguez</small>
+                </div>
+                <button id="closeButton" onclick="closeForm()" class="close" style="display: none;">Cerrar</button>
+                <div id="contactForm" style="display: none;"></div> <!-- Este es el contenedor donde se renderizará el formulario de contacto -->
+                <div id="thankYouMessage" style="display: none;">
+                    <!-- Contenido del mensaje de agradecimiento -->
+                </div>               
+            </div>
+        </footer>
         <script th:inline="javascript">
             /*<![CDATA[*/
             var listaImagenes = /*[[${listaImagenes}]]*/ [];
@@ -196,8 +373,384 @@
                     }, 3000); // Mostrar durante 3 segundos (3000 milisegundos)
                 }
             });
-
         </script>
-        <script th:inline="javascript" src="/publico/js/home.js"></script>
+        <!-- Script main -->
+        <script th:inline="javascript" >
+            const servicios = [
+                {
+                    "image": "https://images.pexels.com/photos/594077/pexels-photo-594077.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "name": '"hotel por noche"',
+                    "codigo": 1,
+                    "description": "Experimenta el lujo y la comodidad en nuestro hotel, donde cada noche se convierte en una experiencia inolvidable de descanso y hospitalidad."
+                },
+                {
+                    "image": "https://images.pexels.com/photos/1592384/pexels-photo-1592384.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "name": '"alquiler de auto"',
+                    "codigo": 2,
+                    "description": "Vive la libertad de explorar a tu propio ritmo con nuestro servicio de alquiler de autos, donde cada viaje se convierte en una oportunidad para descubrir nuevos destinos."
+                },
+                {
+                    "image": "https://images.pexels.com/photos/385997/pexels-photo-385997.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "name": '"pasaje de colectivo"',
+                    "codigo": 3,
+                    "description": "Viaja con comodidad y seguridad en nuestros servicios de pasaje en colectivo, donde cada trayecto se transforma en un recorrido placentero y sin preocupaciones."
+                },
+                {
+                    "image": "https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "name": '"pasaje de avión"',
+                    "codigo": 4,
+                    "description": "Descubre la libertad de volar con nuestro servicio de pasaje aéreo, donde cada viaje es una aventura que te acerca a tus destinos soñados."
+                },
+                {
+                    "image": "https://images.pexels.com/photos/15536055/pexels-photo-15536055/free-photo-of-edificios-entrenar-tren-vehiculo.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "name": '"pasaje de tren"',
+                    "codigo": 5,
+                    "description": "Embárcate en una travesía única con nuestro servicio de pasaje en tren, donde cada viaje es una experiencia pintoresca y llena de encanto que te conecta con destinos fascinantes."
+                },
+                {
+                    "image": "https://images.pexels.com/photos/15710357/pexels-photo-15710357/free-photo-of-paisaje-montanas-cielo-hombre.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "name": '"excursiones"',
+                    "codigo": 6,
+                    "description": "Sumérgete en la emoción y la exploración con nuestras excursiones, donde cada paso te lleva a descubrir nuevos horizontes y experiencias inolvidables."
+                },
+                {
+                    "image": "https://images.pexels.com/photos/433452/pexels-photo-433452.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    "name": '"entrada a eventos"',
+                    "codigo": 7,
+                    "description": "Sumérgete en la emoción y la diversión con nuestro servicio de entrada a eventos, donde cada acceso te brinda la oportunidad de disfrutar momentos inolvidables llenos de entretenimiento y cultura."
+                },
+                {
+                    "image": "https://th.bing.com/th/id/OIP.CeJBTq8DXvXKZgDQWawqHwHaEK?rs=1&pid=ImgDetMain",
+                    "name": '"paquetes"',
+                    "codigo": 8,
+                    "description": "¡Descubre nuestras ofertas exclusivas y elige el paquete perfecto para tus vacaciones! Desde emocionantes combos de pasaje de avión y hotel hasta opciones adicionales para personalizar tu experiencia."
+                }
+            ];
+
+// Obtener referencia a los elementos del DOM
+            const thumbnailsContainer = document.getElementById("thumbnails");
+            const mainImage = document.getElementById("mainImage");
+            const serviceName = document.getElementById("serviceName");
+            const serviceDescription = document.getElementById("serviceDescription");
+            const prevButton = document.getElementById("prevButton");
+            const nextButton = document.getElementById("nextButton");
+            const plusButtonContainer = document.getElementById("plusButtonContainer");
+
+// Inicializar el índice del servicio actual
+            let currentServiceIndex = 0;
+
+// Función para actualizar la visualización del servicio con animación
+            function updateServiceView(index) {
+                const content = document.getElementById("serviceContent");
+                const servicio = servicios[index];
+
+                // Eliminar la animación anterior
+                content.style.animation = "none";
+                content.offsetHeight; // Trigger reflow para aplicar la eliminación de la animación
+                // Volver a aplicar la animación
+                content.style.animation = "fadeIn 1s forwards";
+
+                // Actualizar la imagen principal y el contenido del servicio
+                mainImage.style.backgroundImage = `url(${servicio.image})`;
+                serviceName.innerText = servicio.name;
+                serviceDescription.innerText = servicio.description;
+
+                // Actualizar el enlace del botón "+"
+                const plusButton = document.getElementById("plusButton");
+                plusButton.href = `/servicio/listarPorTipo/${servicio.codigo}`;
+
+                // Remover la clase de animación de todas las miniaturas
+                const thumbnails = document.querySelectorAll(".secondary-image-container");
+                thumbnails.forEach(thumbnail => thumbnail.classList.remove("show-animation"));
+                // Agregar la clase de animación a la miniatura seleccionada
+                thumbnails[index].classList.add("show-animation");
+            }
+
+// Manejador de eventos para el botón "Prev"
+            prevButton.addEventListener("click", () => {
+                currentServiceIndex = (currentServiceIndex - 1 + servicios.length) % servicios.length;
+                updateServiceView(currentServiceIndex);
+            });
+
+// Manejador de eventos para el botón "Next"
+            nextButton.addEventListener("click", () => {
+                currentServiceIndex = (currentServiceIndex + 1) % servicios.length;
+                updateServiceView(currentServiceIndex);
+            });
+
+// Función para crear miniaturas de imágenes secundarias
+            function createThumbnail(service, index) {
+                const thumbnail = document.createElement("div");
+                thumbnail.classList.add("secondary-image-container");
+                thumbnail.style.backgroundImage = `url(${service.image})`;
+                thumbnail.style.backgroundSize = "cover";
+                thumbnail.style.backgroundPosition = "center";
+                thumbnail.style.width = "50px";
+                thumbnail.style.height = "90px";
+                thumbnail.addEventListener("click", () => {
+                    currentServiceIndex = index;
+                    updateServiceView(index);
+                });
+                return thumbnail;
+            }
+
+// Crear miniaturas al cargar la página
+            servicios.forEach((service, index) => {
+                const thumbnail = createThumbnail(service, index);
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+
+// Mostrar el primer servicio al cargar la página
+            updateServiceView(currentServiceIndex);
+
+// Definir la animación de entrada (fadeIn)
+            const style = document.createElement("style");
+            style.innerHTML = `
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 0.9;
+            transform: translateY(0);
+        }
+    }
+`;
+            document.head.appendChild(style);
+        </script>
+        <script th:inline="javascript" >
+            /* Función para mostrar la parte relativa */
+            function showDetails(button) {
+                var parent = button.closest('.article');
+                var relative = parent.querySelector('.relative');
+                relative.classList.remove('hidden');
+                relative.classList.add('show');
+            }
+
+            /* Función para ocultar la parte relativa */
+            function hideDetails(button) {
+                var parent = button.closest('.article');
+                var relative = parent.querySelector('.relative');
+                relative.classList.remove('show');
+                relative.classList.add('hidden');
+            }
+
+            /*script sectionHome*/
+        // Datos de los servicios
+            const responseService = [
+                {
+                    "id_servicio": 2,
+                    "image": "https://th.bing.com/th/id/OIP._cQPFprkjlbmXSsXDgfKJgHaDw?rs=1&pid=ImgDetMain",
+                    "created_at": "2024-03-14T00:00:00.000000+00:00",
+                    "name": "Hotel del Bosque",
+                    "description": "Sumérgete en la naturaleza en el Hotel del Bosque, situado en medio de exuberantes bosques. Disfruta de actividades al aire libre durante el día y comodidades de lujo por la noche.",
+                    "service_destination": "Montañas Verdes, Canadá",
+                    "service_date": "2024-06-15",
+                    "cost": 180000,
+                    "service_code": 1,
+                    "vendedor_id_vendedor": 2,
+                    "visited": 70
+                },
+                {
+                    "id_servicio": 34,
+                    "image": "https://th.bing.com/th/id/OIP.3mnpZ63xOEaOHOLguDPJzgHaEo?rs=1&pid=ImgDetMain",
+                    "created_at": "2024-03-14T00:00:00.000000+00:00",
+                    "name": "Tren Glacier Express de Zermatt a St. Moritz",
+                    "description": "Embárcate en un viaje panorámico a través de los Alpes suizos con el tren Glacier Express. Disfruta de vistas espectaculares de montañas, valles y glaciares en este recorrido inolvidable.",
+                    "service_destination": "Zermatt, Suiza - St. Moritz, Suiza",
+                    "service_date": "2024-09-05",
+                    "cost": 120000,
+                    "service_code": 5,
+                    "vendedor_id_vendedor": 4,
+                    "visited": 60
+                },
+                {
+                    "id_servicio": 51,
+                    "image": "https://th.bing.com/th/id/OIP.KnAhNf723m72AMWm1ws4OgHaEm?rs=1&pid=ImgDetMain",
+                    "created_at": "2024-03-14T00:00:00.000000+00:00",
+                    "name": "Concierto de Coldplay",
+                    "description": "¡No te pierdas la oportunidad de ver a Coldplay en concierto! Disfruta de una noche llena de música, energía y emoción con una de las bandas más icónicas del mundo.",
+                    "service_destination": "Estadio Wembley, Londres, Reino Unido",
+                    "service_date": "2024-07-10",
+                    "cost": 10000,
+                    "service_code": 7,
+                    "vendedor_id_vendedor": 1,
+                    "visited": 40
+                },
+                {
+                    "id_servicio": 6,
+                    "image": "https://th.bing.com/th/id/OIP.Ks_hUUwQ_Z2W00uI6qpyTAHaE8?rs=1&pid=ImgDetMain",
+                    "created_at": "2024-03-14T00:00:00.000000+00:00",
+                    "name": "Hotel Montaña",
+                    "description": "Escápate a la montaña y disfruta de la tranquilidad en el Hotel Montaña. Rodeado de naturaleza, este hotel es perfecto para los amantes del aire libre.",
+                    "service_destination": "Montañas Nevadas, Suiza",
+                    "service_date": "2024-09-05",
+                    "cost": 250000,
+                    "service_code": 1,
+                    "vendedor_id_vendedor": 6,
+                    "visited": 55
+                },
+                {
+                    "id_servicio": 12,
+                    "image": "https://th.bing.com/th/id/OIP.JlkTLA9clENQsDwOSg_0AAAAAA?rs=1&pid=ImgDetMain",
+                    "created_at": "2024-03-14T00:00:00.000000+00:00",
+                    "name": "Ford Mustang Convertible",
+                    "description": "Siente la emoción de conducir un clásico americano con este Ford Mustang Convertible. Ideal para disfrutar del sol y la brisa en tus viajes.",
+                    "service_destination": "Miami, Estados Unidos",
+                    "service_date": "2024-09-10",
+                    "cost": 120000,
+                    "service_code": 2,
+                    "vendedor_id_vendedor": 2,
+                    "visited": 55
+                },
+                {
+                    "id_servicio": 70,
+                    "image": "https://th.bing.com/th/id/OIP.cGyIU-nYFCwcxEZvkc9wHQHaEK?rs=1&pid=ImgDetMain",
+                    "created_at": "2024-03-14T00:00:00.000000+00:00",
+                    "name": "Excursión a la Gran Barrera de Coral",
+                    "description": "Sumérgete en las aguas cristalinas de la Gran Barrera de Coral en Australia. Explora arrecifes de coral, nados con tiburones y una increíble diversidad marina.",
+                    "service_destination": "Queensland, Australia",
+                    "service_date": "2024-09-10",
+                    "cost": 17000,
+                    "service_code": 6,
+                    "vendedor_id_vendedor": 10,
+                    "visited": 55
+                },
+                {
+                    id_servicio: 21,
+                    image: "https://i.pinimg.com/736x/eb/11/a9/eb11a985ab723315a01e56f436e13d53.jpg",
+                    created_at: "2024-03-14T00:00:00.000000+00:00",
+                    name: "Vuelo de Nueva York a París",
+                    description:
+                            "¡Experimenta la magia de París con este vuelo directo desde la bulliciosa ciudad de Nueva York! Descubre la belleza de la Ciudad de la Luz y su encanto inigualable.",
+                    service_destination: "Nueva York, Estados Unidos - París, Francia",
+                    service_date: "2024-07-10",
+                    cost: 120000,
+                    service_code: 4,
+                    vendedor_id_vendedor: 1,
+                    visited: 40,
+                },
+                {
+                    "id_servicio": 63,
+                    "image": "https://th.bing.com/th/id/OIP.M1w6he8HmICsyWLXHOn9SAHaIU?w=1024&h=1150&rs=1&pid=ImgDetMain",
+                    "created_at": "2024-03-14T00:00:00.000000+00:00",
+                    "name": "Excursión a la Gran Muralla China",
+                    "description": "Camina sobre la legendaria Gran Muralla China y maravíllate con sus impresionantes vistas. Descubre la historia y la grandeza de esta maravilla arquitectónica.",
+                    "service_destination": "Pekín, China",
+                    "service_date": "2024-07-20",
+                    "cost": 8000,
+                    "service_code": 6,
+                    "vendedor_id_vendedor": 3,
+                    "visited": 50
+                }
+            ];
+        // Función para generar el HTML de cada servicio y agregarlo al contenedor
+            function renderServicios() {
+                const serviciosContainer = document.getElementById('serviciosContainer');
+                serviciosContainer.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevos servicios
+
+                responseService.forEach((servicio, index) => {
+                    const servicioHTML = `
+                <div class="card group" style="background-image: url('${servicio.image}')">
+                    <div class="card-header">
+                        <h3 class="nombre-servicio">${servicio.name}</h3>
+                    </div>
+                    <article class="card-description">
+                        <div>
+                            <h3 class="destino-servicio">Destino: ${servicio.service_destination}</h3>
+                        </div>
+                        <div class="container-ver-mas-btn">
+                            <button class="ver-mas-btn" onclick="toggleDescription(${index})">Ver más</button>
+                        </div>
+                        <div class="descripcion-container" id="descripcion${index}" style="display: none;">
+                            <p class="descripcion-servicio">${servicio.description}</p>
+                            <div class="container-ver-menos-btn">
+                                <button class="ver-menos-btn" onclick="toggleDescription(${index})">Ver menos</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            `;
+                    serviciosContainer.innerHTML += servicioHTML;
+                });
+            }
+
+        // Función para mostrar u ocultar la descripción de un servicio
+            function toggleDescription(index) {
+                const descripcion = document.getElementById(`descripcion${index}`);
+                descripcion.style.display = descripcion.style.display === 'none' ? 'flex' : 'none';
+            }
+
+            renderServicios();
+
+            function toggleContactForm() {
+                var contactFormDiv = document.getElementById("contactForm");
+                var closeButton = document.getElementById("closeButton");
+                var thankYouMessageDiv = document.getElementById("thankYouMessage");
+                if (contactFormDiv.innerHTML === "") {
+                    var formHTML = '<form onsubmit="mostrarAgradecimiento(event);">' +
+                            '<h4>Envíanos tu sugerencia</h4>' +
+                            '<div class="form-group">' +
+                            '<label for="contactoNombre">Nombre</label></br>' +
+                            '<input type="text" id="contactoNombre" name="contactoNombre" placeholder="Escribe aquí tu nombre" required />' +
+                            '</div>' +
+                            '<div class="form-group">' +
+                            '<label for="contactoEmail">Email</label></br>' +
+                            '<input type="email" id="contactoEmail" name="contactoEmail" placeholder="Escribe aquí tu Correo electrónico" required />' +
+                            '</div>' +
+                            '<div class="form-group">' +
+                            '<label for="contactoMensaje">Mensaje</label></br>' +
+                            '<textarea id="contactoMensaje" name="contactoMensaje" placeholder="Escribe aquí tu sugerencia" rows="5" required></textarea>' +
+                            '</div>' +
+                            '<button type="submit">Enviar</button>' +
+                            '</form>';
+                    contactFormDiv.innerHTML = formHTML;
+                    contactFormDiv.style.display = "flex";
+                    closeButton.style.display = "block"; // Mostrar el botón de cerrar
+                } else {
+                    contactFormDiv.innerHTML = ""; // Limpiar el contenido del formulario
+                    closeButton.style.display = "none"; // Ocultar el botón de cerrar
+                }
+
+                thankYouMessageDiv.style.display = "none"; // Asegurarse de ocultar el mensaje de agradecimiento
+            }
+
+            function closeThankYouMessage() {
+                var thankYouMessageDiv = document.getElementById("thankYouMessage");
+                thankYouMessageDiv.style.display = "none";
+            }
+
+            function closeForm() {
+                var contactFormDiv = document.getElementById("contactForm");
+                var closeButton = document.getElementById("closeButton");
+                var thankYouMessageDiv = document.getElementById("thankYouMessage");
+                contactFormDiv.innerHTML = ""; // Limpiar el contenido del formulario
+                closeButton.style.display = "none"; // Ocultar el botón de cerrar
+                contactFormDiv.style.display = "none";
+                thankYouMessageDiv.style.display = "none"; // Asegurarse de ocultar el mensaje de agradecimiento
+            }
+
+        // Función para simular el mensaje de agradecimiento
+            function mostrarAgradecimiento(event) {
+                event.preventDefault(); // Evitar el comportamiento por defecto del formulario
+
+                var contactFormDiv = document.getElementById("contactForm");
+                var contactForm = document.querySelector("#contactForm form");
+                var contactoNombre = contactForm.elements.contactoNombre.value;
+                var contactoEmail = contactForm.elements.contactoEmail.value;
+                var contactoMensaje = contactForm.elements.contactoMensaje.value;
+                var thankYouMessageDiv = document.getElementById("thankYouMessage");
+                var closeButton = document.getElementById("closeButton");
+                // Actualizar el contenido del mensaje de agradecimiento
+                var mensaje = `¡Gracias por tu sugerencia, ${contactoNombre}!<br />
+                        Para más información, ¡regístrate!`;
+                thankYouMessageDiv.innerHTML = mensaje;
+                // Mostrar el mensaje de agradecimiento
+                thankYouMessageDiv.style.display = "block";
+                contactFormDiv.style.display = "none";
+                closeButton.style.display = "block"; // Mostrar el botón de cerrar
+            }
+        </script>
     </body>
 </html>
