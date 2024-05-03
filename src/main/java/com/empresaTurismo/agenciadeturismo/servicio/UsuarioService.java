@@ -32,7 +32,9 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private IUsuarioRepository usuarioRepo;
 
+    @Autowired
     private IServicioRepository servicioRepo;
+
 
     @Transactional
     public void crearUsuario(String nombre, String apellido, String direccion,
@@ -55,7 +57,12 @@ public class UsuarioService implements UserDetailsService {
         usuario.setCelular(celular);
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+        List <Usuario> lista = usuarioRepo.findAll();
+        if(lista.isEmpty()){
+            usuario.setRol(Rol.ADMIN);
+        }else{
         usuario.setRol(rol);
+        }
         usuario.setCargo(cargo);
         usuario.setSueldo(sueldo);
         if (rol.equals(Rol.VENDEDOR)) {

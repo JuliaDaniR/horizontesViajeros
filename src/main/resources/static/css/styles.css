@@ -1611,16 +1611,16 @@
 }
 
 /*Pagina error*/
-.contenedor-portada{
+.contenedor-portada-errores{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.contenedor-portada h1{
+.contenedor-portada-errores h1{
     font-weight: 800;
     margin-top: 12rem;
 }
-.contenedor-header {
+.contenedor-header-errores {
     height: 100vh;
     background-image: url("/publico/image/serviciosOfrecidos.jpg");
     background-repeat: no-repeat;

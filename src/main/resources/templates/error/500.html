@@ -27,9 +27,9 @@
         <title>Horizontes Viajeros</title>
     </head>
     <body>
-        <header class="contenedor-header">
-            <div class="contenedor-portada">
-                <img th:src="@{/publico/image/ERROR500_PANTALLA.jpeg}" style="width: 65rem"  alt="imagen error"/>
+        <header class="contenedor-header-errores">
+            <div class="contenedor-portada-errores">
+                <img src="/publico/image/ERROR500_PANTALLA.jpeg" style="width: 65rem"  alt="imagen error"/>
                 <div style="font-weight: bold">
                     <h1 th:text="${'Estado ' + status 
                         + ', lo que significa : ' + error + '.'}"></h1>
