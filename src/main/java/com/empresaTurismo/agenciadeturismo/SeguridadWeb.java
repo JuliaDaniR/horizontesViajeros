@@ -9,10 +9,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SeguridadWeb {
+public class SeguridadWeb implements WebMvcConfigurer {
 
     @Autowired
     public UsuarioService usuarioService;
@@ -26,23 +28,29 @@ public class SeguridadWeb {
     @Bean
     public SecurityFilterChain filtroCadena(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(autoriza -> autoriza
-                                                    .requestMatchers("/admin/*")
-                                                    .hasRole("ADMIN")
-                                                    .requestMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll())
-                                .formLogin(autoriza -> autoriza.loginPage("/login")
-                                                    .loginProcessingUrl("/logincheck")
-                                                    .usernameParameter("email")
-                                                    .passwordParameter("password")
-                                                    .defaultSuccessUrl("/")
-                                                    .permitAll())
-                                .logout(autoriza -> autoriza
-                                                    .logoutUrl("/logout")
-                                                    .logoutSuccessUrl("/")
-                                                    .permitAll())
-                                .csrf(csrfCustomizer -> csrfCustomizer
-                                                    .disable())
-                                .build();
+                .requestMatchers("/admin/*")
+                .hasRole("ADMIN")
+                .requestMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll())
+                .formLogin(autoriza -> autoriza.loginPage("/login")
+                .loginProcessingUrl("/logincheck")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
+                .permitAll())
+                .logout(autoriza -> autoriza
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll())
+                .csrf(csrfCustomizer -> csrfCustomizer
+                .disable())
+                .build();
 
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/publico/**")
+                .addResourceLocations("classpath:/publico/");
     }
 }
 //@Autowired
