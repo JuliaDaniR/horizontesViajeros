@@ -56,6 +56,7 @@ public class ServicioService {
         // Inicializar un objeto de servicio
         Servicio servicio = new Servicio();
 
+        System.out.println("url_imagenes "+ urls_imagenes);
         System.out.println("id-vendedor " + id_vendedor);
         // Obtener el vendedor del servicio
         Usuario vendedor = obtenerVendedor(id_vendedor);

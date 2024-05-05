@@ -28,26 +28,29 @@
     </head>
     <body>
         <header class="contenedor-header-errores">
+            <nav class="navegacion">
+                <span class="textColor">
+                    <a th:href="@{/}" class="cursor-pointer" style="text-decoration: none">
+                        Horizontes Viajeros
+                    </a>
+                </span>               
+            </nav>
             <div class="contenedor-portada-errores">
-                <img src="/publico/image/ERROR500_PANTALLA.jpeg" style="width: 65rem"  alt="imagen error"/>
-                <div style="font-weight: bold">
+                <img src="/publico/image/ERROR500_PANTALLA.jpeg" alt="imagen error"
+                     style="width: 20rem; padding-top: 10rem; border-radius: 50%"                    
+                     />
+                <div style="font-weight: bold; padding-bottom: 3rem">
                     <h1 th:text="${'Estado ' + status 
                         + ', lo que significa : ' + error + '.'}"></h1>
-                    <h3>Problema en la página 
+                    <h3>Problema en la página o No hay información para mostrar
                         (<span th:text="${path}"></span>).</h3>
                     <h3 th:text="${'Detalle: ' + message + '.'}"></h3>
-                    <a class="btn" href="/">Inicio</a>
+                    <a class="btn" style="background-color: steelblue; padding: .5rem; border: 3px solid slateblue" href="/">Volver al home</a>
                 </div>
             </div>
         </header>
         <footer id="contacto">
             <div class="footer">
-                <div class="contain-btn-comentarios">
-                    <button class="btn-comentario" onclick="toggleContactForm()">
-                        <span class="mr-2"><span class="fa fa-comments"></span></span>Comentarios 
-                    </button>
-                </div>
-
                 <div class="contain-redes flex gap-x-4">
                     <i class="bi bi-github" style="font-size: 28px;"></i>
                     <i class="bi bi-twitter" style="font-size: 28px;"></i>
@@ -56,12 +59,7 @@
                 <div class="mt-4">
                     <p class="text-[25px] font-bold capitalize">&#9400; copyright - 2024</p>
                     <small class="mt-1.5 font-semibold">Elaborado por Julia Rodriguez</small>
-                </div>
-                <button id="closeButton" onclick="closeForm()" class="close" style="display: none;">Cerrar</button>
-                <div id="contactForm" style="display: none;"></div> <!-- Este es el contenedor donde se renderizará el formulario de contacto -->
-                <div id="thankYouMessage" style="display: none;">
-                    <!-- Contenido del mensaje de agradecimiento -->
-                </div>               
+                </div>              
             </div>
         </footer>
     </body>

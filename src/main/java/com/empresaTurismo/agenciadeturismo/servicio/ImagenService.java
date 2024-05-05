@@ -87,7 +87,7 @@ public class ImagenService {
             System.out.println("inputStream " + inputStream);
             // Guardar la imagen en el sistema de archivos local
             String nombreArchivo = obtenerNombreArchivoDesdeUrl(url);
-            Path filePath = Paths.get("C:\\Users\\julid\\OneDrive\\Escritorio\\Agencia Turismo con Spring\\agencia-de-turismo\\src\\main\\resources\\public\\uploads", nombreArchivo);
+            Path filePath = Paths.get("C:\\Users\\julid\\OneDrive\\Escritorio\\Agencia Turismo con Spring\\agencia-de-turismo\\src\\main\\resources\\publico\\uploads", nombreArchivo);
             Files.copy(inputStream, filePath);
 
             // Se establece la ruta de la imagen
@@ -102,7 +102,7 @@ public class ImagenService {
             // Guardar la entidad Imagen en la base de datos
             return imagenRepo.save(imagen);
         } catch (IOException e) {
-            throw new MyException("Error al obtener la imagen desde la URL");
+            throw new MyException("Error al obtener la imagen desde la URL seleccione otra");
         }
     }
 

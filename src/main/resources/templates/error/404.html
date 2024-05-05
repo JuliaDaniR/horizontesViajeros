@@ -28,17 +28,24 @@
     </head>
     <body>
         <header class="contenedor-header-errores">
+            <nav class="navegacion">
+                <span class="textColor">
+                    <a th:href="@{/}" class="cursor-pointer" style="text-decoration: none">
+                        Horizontes Viajeros
+                    </a>
+                </span>               
+            </nav>
             <div class="contenedor-portada-errores">
                 <img src="/publico/image/ERROR404_PANTALLA.jpeg" alt="imagen error"
-                     style="width: 65rem"                    
+                     style="width: 20rem; padding-top: 10rem; border-radius: 50%"                    
                      />
-                <div style="font-weight: bold">
+                <div style="font-weight: bold; padding-bottom: 3rem">
                     <h1 th:text="${'Estado ' + status 
                         + ', lo que significa : ' + error + '.'}"></h1>
                     <h3>Problema en la página 
                         (<span th:text="${path}"></span>).</h3>
                     <h3 th:text="${'Detalle: ' + message + '.'}"></h3>
-                    <a class="btn" href="/">Inicio</a>
+                    <a class="btn" style="background-color: steelblue; padding: .5rem; border: 3px solid slateblue" href="/">Volver al home</a>
                 </div>
             </div>
         </header>

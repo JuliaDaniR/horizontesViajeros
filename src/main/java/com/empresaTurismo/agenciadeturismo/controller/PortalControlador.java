@@ -6,12 +6,10 @@ import com.empresaTurismo.agenciadeturismo.servicio.EmailService;
 import com.empresaTurismo.agenciadeturismo.servicio.ServicioService;
 import com.empresaTurismo.agenciadeturismo.servicio.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,6 +58,7 @@ public class PortalControlador {
         int elementosMostrar = 8;
         int numElementosMostrar = 5;
 
+        System.out.println("lista mas vendidos "+ serviciosMasVendidos);
         if (serviciosMasVendidos.size() >= numElementosMostrar) {
             primeros5ServiciosMasVendidos = serviciosMasVendidos.subList(0, numElementosMostrar);
         }
@@ -67,7 +66,7 @@ public class PortalControlador {
         if (serviciosMasVisitados.size() >= elementosMostrar) {
             primeros8ServiciosMasVisitados = serviciosMasVisitados.subList(0, elementosMostrar);
         }
-
+        System.out.println("lista mas vendidos "+ primeros5ServiciosMasVendidos);
         System.out.println("mas visitados "+primeros8ServiciosMasVisitados);
         
         modelo.addAttribute("listaImagenes", bgImage);

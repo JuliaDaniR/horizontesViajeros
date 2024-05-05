@@ -132,7 +132,7 @@ public class ServicioController {
             redirectAttrs.addFlashAttribute("error", ex.getMessage());
         }
 
-        return "index.html";
+        return "redirect:/";
 
     }
 
