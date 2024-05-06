@@ -10,8 +10,8 @@ import com.empresaTurismo.agenciadeturismo.servicio.ImagenService;
 import com.empresaTurismo.agenciadeturismo.servicio.ServicioService;
 import com.empresaTurismo.agenciadeturismo.servicio.UsuarioService;
 import com.empresaTurismo.agenciadeturismo.servicio.VentaService;
-import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -22,9 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -402,12 +400,12 @@ public class ServicioController {
             @RequestParam Double costo_servicio,
             @RequestParam TipoServicio tipoServicio,
             @RequestParam(required = false) Long id_usuario,
-            @RequestParam(required = false) String id_imagenes, // Cambio en la firma para recibir una cadena de IDs
+            @RequestParam(required = false) String id_imagenes, 
             @RequestParam(required = false) String url_imagen1,
             @RequestParam(required = false) String url_imagen2,
             @RequestParam(required = false) String url_imagen3,
             @RequestParam(required = false) String url_imagen4,
-            RedirectAttributes redirectAttrs) {
+            RedirectAttributes redirectAttrs) throws IOException {
 
         System.out.println("id-usuario " + id_usuario);
 
@@ -439,7 +437,7 @@ public class ServicioController {
                 // Lógica para crear el servicio utilizando los parámetros recibidos
                 servicioService.modificarServicio(codigo_servicio, nombre, descripcion_breve, destino_servicio, pais_destino,
                         fecha_servicio, costo_servicio, tipoServicio, id_usuario, idList, urls_imagenes); // Modificación en la llamada al servicio
-                redirectAttrs.addFlashAttribute("exito", "El Servicio fue guardado con éxito");
+                redirectAttrs.addFlashAttribute("exito", "El Servicio fue actualizado con éxito");
             } else {
                 // Manejar el caso cuando id_imagenes es null o vacío
                 redirectAttrs.addFlashAttribute("error", "No se proporcionaron IDs de imágenes válidos.");

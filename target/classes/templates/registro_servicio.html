@@ -122,7 +122,7 @@
                         <label for="pais_destino">País del destino:</label>
                         <select class="form-control" id="pais_destino" name="pais_destino">
                             <option>Seleccionar pais</option>
-                            <option th:each="pais : ${paises}" th:value="${pais_destino}" th:text="${pais}" style="color: black"></option>
+                            <option th:each="pais_destino : ${paises}" th:value="${pais_destino}" th:text="${pais_destino}" style="color: black"></option>
                         </select>
                     </div>
                     <div>

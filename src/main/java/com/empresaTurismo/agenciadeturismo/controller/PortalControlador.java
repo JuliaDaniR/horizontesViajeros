@@ -107,7 +107,7 @@ public class PortalControlador {
         modelo.put("contactoMensaje", contactoMensaje);
         modelo.put("mostrarAgradecimiento", true); // Indicar que se debe mostrar el mensaje de agradecimiento
         // Devolver la vista con el mensaje de agradecimiento
-        return "index.html"; // Supongo que la vista donde se muestra el formulario es index.html
+        return "redirect:/"; // Supongo que la vista donde se muestra el formulario es index.html
     }
 
 }

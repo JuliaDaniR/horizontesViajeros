@@ -11,6 +11,8 @@ import com.empresaTurismo.agenciadeturismo.enumerador.TipoServicio;
 import com.empresaTurismo.agenciadeturismo.excepciones.MyException;
 import com.empresaTurismo.agenciadeturismo.repositorio.IUsuarioRepository;
 import jakarta.transaction.Transactional;
+import java.io.IOException;
+import java.net.ProtocolException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
 public class ServicioService {
@@ -53,46 +56,46 @@ public class ServicioService {
             Long id_vendedor,
             List<String> urls_imagenes) throws MyException {
 
-        // Inicializar un objeto de servicio
-        Servicio servicio = new Servicio();
-
-        System.out.println("url_imagenes "+ urls_imagenes);
-        System.out.println("id-vendedor " + id_vendedor);
-        // Obtener el vendedor del servicio
-        Usuario vendedor = obtenerVendedor(id_vendedor);
-
-        servicio.setNombre(nombre);
-        servicio.setDescripcion_breve(descripcion_breve);
-        servicio.setDestino_servicio(destino_servicio);
-        servicio.setPais_destino(pais_destino);
-        servicio.setFecha_servicio(fecha_servicio);
-        servicio.setCosto_servicio(costo_servicio);
-        servicio.setTipoServicio(tipoServicio);
-        servicio.setVendedor(vendedor);
-        servicio.setCantidad(0);
-        servicio.setVisitas(0);
-
-        // Guardar el servicio en el repositorio
+        List<Imagen> imagenes = new ArrayList<>();
         try {
+            // Crear y configurar el servicio
+            Servicio servicio = new Servicio();
+            Usuario vendedor = obtenerVendedor(id_vendedor);
 
-            servicioRepo.save(servicio);
+            servicio.setNombre(nombre);
+            servicio.setDescripcion_breve(descripcion_breve);
+            servicio.setDestino_servicio(destino_servicio);
+            servicio.setPais_destino(pais_destino);
+            servicio.setFecha_servicio(fecha_servicio);
+            servicio.setCosto_servicio(costo_servicio);
+            servicio.setTipoServicio(tipoServicio);
+            servicio.setVendedor(vendedor);
+            servicio.setCantidad(0);
+            servicio.setVisitas(0);
+
+            // Guardar el servicio para obtener el ID
+            servicio = servicioRepo.save(servicio);
 
             // Asociar las imágenes con el servicio
-            List<Imagen> imagenes = new ArrayList<>();
             for (String url : urls_imagenes) {
-                Imagen imagen = imagenService.guardarDesdeUrl(url);
-                imagen.setServicio(servicio);
-                imagenes.add(imagen);
+                Imagen imagen = imagenService.guardar(url, servicio);
+                if (imagen != null) {
+                    imagenes.add(imagen);
+                } else {
+                    // Log o mensaje informativo sobre la imagen no guardada, pero sin lanzar excepción
+                    System.out.println("Advertencia: La imagen desde la URL no se pudo guardar correctamente: " + url);
+                }
             }
 
-            System.out.println("imagenes " + imagenes);
-            // Actualizar el servicio con las imágenes asociadas
+            // Asignar las imágenes al servicio
             servicio.setImagenes(imagenes);
 
+            // Guardar el servicio con las imágenes asociadas
             servicioRepo.save(servicio);
 
+            // Mostrar mensaje de éxito
+            System.out.println("El servicio se creó correctamente junto con las imágenes asociadas.");
         } catch (Exception e) {
-
             throw new MyException("Error al crear el servicio: " + e.getMessage());
         }
     }
@@ -125,18 +128,10 @@ public class ServicioService {
     }
 
     @Transactional
-    public void modificarServicio(
-            Long id_servicio,
-            String nombre,
-            String descripcion_breve,
-            String destino_servicio,
-            String pais_destino,
-            Date fecha_servicio,
-            Double costo_servicio,
-            TipoServicio tipoServicio,
-            Long id_vendedor,
-            List<Long> id_imagenes,
-            List<String> url_imagenes) throws MyException {
+    public void modificarServicio(Long id_servicio, String nombre, String descripcion_breve,
+            String destino_servicio, String pais_destino, Date fecha_servicio,
+            Double costo_servicio, TipoServicio tipoServicio, Long id_vendedor,
+            List<Long> id_imagenes, List<String> url_imagenes) throws MyException, ProtocolException, IOException {
 
         // Obtener el servicio a modificar
         Optional<Servicio> optionalServicio = servicioRepo.findById(id_servicio);
@@ -145,8 +140,6 @@ public class ServicioService {
         }
         Servicio servicio = optionalServicio.get();
 
-        System.out.println("id imagen " + id_imagenes);
-        System.out.println("url imagenes " + url_imagenes);
         // Verificar si todas las imágenes existentes proporcionadas existen en la base de datos
         List<Imagen> imagenes = new ArrayList<>();
         if (id_imagenes != null) {
@@ -159,18 +152,18 @@ public class ServicioService {
         // Guardar las nuevas imágenes desde las URLs proporcionadas
         for (String url : url_imagenes) {
             Imagen nuevaImagen = imagenService.guardarDesdeUrl(url);
-            nuevaImagen.setServicio(servicio);
-            imagenes.add(nuevaImagen);
-            System.out.println("nueva imagen " + nuevaImagen);
+            if (nuevaImagen != null) {
+                nuevaImagen.setServicio(servicio);
+                imagenes.add(nuevaImagen);
+            } else {
+                // Log o mensaje informativo sobre la imagen no guardada correctamente
+                System.out.println("Advertencia: La imagen desde la URL no se pudo guardar correctamente: " + url);
+            }
         }
-
-        System.out.println("nueva imagenes " + imagenes);
 
         // Verificar si el usuario autenticado tiene permisos para modificar el servicio
         validarPermisosParaModificar(servicio, id_vendedor);
 
-        System.out.println("ID del servicio en el servicio: " + id_servicio);
-        System.out.println("Nuevas URLs de imágenes: " + url_imagenes);
         // Asignar los nuevos valores al servicio
         servicio.setNombre(nombre);
         servicio.setDescripcion_breve(descripcion_breve);
@@ -296,7 +289,7 @@ public class ServicioService {
     }
 
     public List<Servicio> listarPorPais(String pais_destino) {
-        System.out.println("***********servicio pais "+pais_destino);
+        System.out.println("***********servicio pais " + pais_destino);
         return servicioRepo.listarPorPais(pais_destino);
     }
 
@@ -315,17 +308,17 @@ public class ServicioService {
         List<Imagen> nuevasImagenes = (List<Imagen>) urls_imagenes.stream()
                 .map(url -> new Imagen(servicioExistente, url))
                 .collect(Collectors.toList());
-        
+
         // Guardar las nuevas imágenes asociadas al servicio
         servicioExistente.getImagenes().addAll(nuevasImagenes);
         servicioRepo.save(servicioExistente);
     }
-    
+
     @Transactional
     public void modificarServicioYImagenes(Servicio servicioExistente, String nombre, String descripcion_breve,
-                                           String destino_servicio, String pais_destino, Date fecha_servicio,
-                                           Double costo_servicio, TipoServicio tipoServicio, Long id_usuario,
-                                           List<Long> idList, List<String> urls_imagenes) {
+            String destino_servicio, String pais_destino, Date fecha_servicio,
+            Double costo_servicio, TipoServicio tipoServicio, Long id_usuario,
+            List<Long> idList, List<String> urls_imagenes) {
         // Modificar los campos del servicio
         servicioExistente.setNombre(nombre);
         servicioExistente.setDescripcion_breve(descripcion_breve);
@@ -335,7 +328,7 @@ public class ServicioService {
         servicioExistente.setCosto_servicio(costo_servicio);
         servicioExistente.setTipoServicio(tipoServicio);
         // Puedes continuar con la actualización de otros campos
-        
+
         // Modificar las imágenes existentes si se proporcionan IDs válidos
         if (!idList.isEmpty()) {
             for (Imagen imagen : servicioExistente.getImagenes()) {
@@ -345,15 +338,13 @@ public class ServicioService {
                 }
             }
         }
-        
+
         // Agregar nuevas imágenes al servicio si se proporcionan URLs de imágenes nuevas
         if (!urls_imagenes.isEmpty()) {
             agregarImagenesAlServicio(servicioExistente, urls_imagenes);
         }
-        
+
         // Guardar los cambios en el servicio
         servicioRepo.save(servicioExistente);
     }
 }
-
-

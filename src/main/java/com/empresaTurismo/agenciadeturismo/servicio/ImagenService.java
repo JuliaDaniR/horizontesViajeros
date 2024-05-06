@@ -27,20 +27,6 @@ public class ImagenService {
     private FileStorageService fileStorageService;
 
     @Transactional
-    public Imagen guardar(String url, Servicio servicio) throws MyException {
-        try {
-            Imagen imagen = new Imagen();
-            imagen.setUrl(url);
-            imagen.setServicio(servicio);
-            // Se establece la ruta de la imagen
-            imagen.setRutaImagen(obtenerRutaImagen(url));
-            return imagenRepo.save(imagen);
-        } catch (Exception e) {
-            throw new MyException("Error al guardar la imagen");
-        }
-    }
-
-    @Transactional
     public Imagen actualizar(String url, Long idImagen, Servicio servicio) throws MyException {
         try {
             Imagen imagen;
@@ -63,6 +49,18 @@ public class ImagenService {
 
     public List<Imagen> listarTodos() {
         return imagenRepo.findAll();
+    }
+
+    @Transactional
+    public Imagen guardar(String url, Servicio servicio) throws MyException {
+        try {
+            Imagen imagen = this.guardarDesdeUrl(url);
+            imagen.setServicio(servicio);
+            return imagenRepo.save(imagen);
+        } catch (Exception e) {
+            System.out.println("Advertencia: Error al crear el servicio: " + e.getMessage());
+        }
+        return null;
     }
 
     @Transactional
@@ -99,30 +97,38 @@ public class ImagenService {
             imagen.setMime(connection.getContentType());
             // Si es necesario, puedes establecer más atributos de la imagen aquí
 
-            // Guardar la entidad Imagen en la base de datos
-            return imagenRepo.save(imagen);
-        } catch (IOException e) {
-            throw new MyException("Error al obtener la imagen desde la URL seleccione otra");
+            return imagen;
+
+        } catch (Exception e) {
+            // Log o mensaje informativo sobre el error, sin lanzar la excepción hacia arriba
+            System.out.println("Advertencia: Error al crear el servicio: " + e.getMessage());
         }
+        return null;
     }
 
-// Método para extraer el nombre del archivo de una URL
-private String obtenerNombreArchivoDesdeUrl(String url) {
-    // Obtener el índice del último separador de barra ("/") en la URL
-    int ultimoSeparadorBarra = url.lastIndexOf("/");
+    private String obtenerNombreArchivoDesdeUrl(String url) {
+        // Obtener el índice del último separador de barra ("/") en la URL
+        int ultimoSeparadorBarra = url.lastIndexOf("/");
 
-    // Si no se encuentra ningún separador de barra, se devuelve la URL completa
-    if (ultimoSeparadorBarra == -1 || ultimoSeparadorBarra == url.length() - 1) {
-        return url;
+        // Si no se encuentra ningún separador de barra, se devuelve la URL completa
+        if (ultimoSeparadorBarra == -1 || ultimoSeparadorBarra == url.length() - 1) {
+            return "imagen_desconocida"; // Nombre genérico para casos desconocidos
+        }
+
+        // Eliminar los parámetros de consulta, si existen
+        String urlSinParametros = url.split("\\?")[0];
+
+        // Extraer el nombre del archivo de la URL sin parámetros de consulta
+        String nombreArchivo = urlSinParametros.substring(ultimoSeparadorBarra + 1);
+
+        // Verificar si el nombre de archivo es muy largo
+        if (nombreArchivo.length() > 255) {
+            // Si es muy largo, truncarlo a una longitud adecuada
+            nombreArchivo = nombreArchivo.substring(0, 255);
+        }
+
+        return nombreArchivo;
     }
-
-    // Eliminar los parámetros de consulta, si existen
-    String urlSinParametros = url.split("\\?")[0];
-
-    // Extraer el nombre del archivo de la URL sin parámetros de consulta
-    return urlSinParametros.substring(ultimoSeparadorBarra + 1);
-}
-
 
     // Método para obtener la ruta de la imagen desde una URL
     private String obtenerRutaImagen(String url) {

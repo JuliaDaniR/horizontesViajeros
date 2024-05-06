@@ -1,5 +1,6 @@
 package com.empresaTurismo.agenciadeturismo.entidades;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Imagen {
 
     private String nombre;
 
+    @Column(length = 1000)
     private String url;
 
     private String rutaImagen; // Nueva columna para almacenar la ruta en el sistema de archivos

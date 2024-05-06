@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileStorageService {
     
-    private final String uploadDir = "C:\\Users\\julid\\OneDrive\\Escritorio\\Agencia Turismo con Spring\\agencia-de-turismo\\src\\main\\resources\\public\\uploads";
+    private final String uploadDir = "C:\\Users\\julid\\OneDrive\\Escritorio\\Agencia Turismo con Spring\\agencia-de-turismo\\src\\main\\resources\\publico\\uploads";
     
     public void storeFile(MultipartFile file, String fileName) throws IOException {
         Path uploadPath = Paths.get(uploadDir);
