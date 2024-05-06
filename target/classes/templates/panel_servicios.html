@@ -149,7 +149,7 @@
                                     <!-- Verificar si la lista de imágenes está vacía o nula -->
                                     <div th:if="${#lists.isEmpty(servicio.imagenes)}">
                                         <!-- Mostrar una imagen predeterminada -->
-                                        <img src="/image/No-disponible.jpg" alt="Imagen predeterminada" />
+                                        <img src="/publico/image/No-disponible.jpg" alt="Imagen predeterminada" />
                                     </div>
                                     <!-- Si hay imágenes, mostrar la primera imagen del servicio -->
                                     <div th:unless="${#lists.isEmpty(servicio.imagenes)}">
@@ -221,7 +221,7 @@
                                     <!-- Verificar si la lista de imágenes está vacía o nula -->
                                     <div th:if="${#lists.isEmpty(servicio.imagenes)}">
                                         <!-- Mostrar una imagen predeterminada -->
-                                        <img src="/image/No-disponible.jpg" alt="Imagen predeterminada" />
+                                        <img src="/publico/image/No-disponible.jpg" alt="Imagen predeterminada" />
                                     </div>
                                     <!-- Si hay imágenes, mostrar la primera imagen del servicio -->
                                     <div th:unless="${#lists.isEmpty(servicio.imagenes)}">

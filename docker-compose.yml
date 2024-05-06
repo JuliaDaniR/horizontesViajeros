@@ -10,6 +10,8 @@ services:
       DB_URL: jdbc:mysql://agencia_bd:3306/agencia_turismo?createDatabaseIfNotExist=true&serverTimezone=UTC
       DB_USER_NAME: root
       DB_PASSWORD: root
+    volumes:
+      - ./src/main/resources/publico/uploads:/app/publico/uploads    
     restart: always
     depends_on:
       - agencia_bd
