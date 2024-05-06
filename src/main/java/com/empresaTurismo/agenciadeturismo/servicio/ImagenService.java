@@ -8,10 +8,12 @@ import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,10 +67,11 @@ public class ImagenService {
 
     @Transactional
     public Imagen guardarDesdeUrl(String url) throws MyException {
-
         System.out.println("url " + url);
+        Imagen imagen = new Imagen();
+        
         try {
-            Imagen imagen = new Imagen();
+            
             imagen.setUrl(url);
 
             // Obtener el contenido de la imagen desde la URL
@@ -77,21 +80,27 @@ public class ImagenService {
             System.out.println("imageUrl " + imageUrl);
             HttpURLConnection connection = (HttpURLConnection) imageUrl.openConnection();
             connection.setRequestMethod("GET");
+
+            // Configurar tiempo de espera en milisegundos (por ejemplo, 10 segundos)
+            connection.setConnectTimeout(30000); // Tiempo de espera para la conexión
+            connection.setReadTimeout(30000);    // Tiempo de espera para la lectura de datos
+
             connection.connect();
 
             System.out.println("connection " + connection);
             InputStream inputStream = connection.getInputStream();
 
             System.out.println("inputStream " + inputStream);
+
             // Guardar la imagen en el sistema de archivos local
             String nombreArchivo = obtenerNombreArchivoDesdeUrl(url);
-            Path filePath = Paths.get("C:\\Users\\julid\\OneDrive\\Escritorio\\Agencia Turismo con Spring\\agencia-de-turismo\\src\\main\\resources\\publico\\uploads", nombreArchivo);
-            Files.copy(inputStream, filePath);
+            String directorioUploads = "C:\\Users\\julid\\OneDrive\\Escritorio\\Agencia Turismo con Spring\\agencia-de-turismo\\src\\main\\resources\\publico\\uploads";
+            Path filePath = Paths.get(directorioUploads, nombreArchivo);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            // Se establece la ruta de la imagen
+// Se establece la ruta de la imagen
             String rutaImagen = filePath.toString();
             imagen.setRutaImagen(rutaImagen);
-
             // Establecer los detalles de la imagen en la entidad Imagen
             imagen.setNombre(nombreArchivo);
             imagen.setMime(connection.getContentType());
@@ -99,11 +108,17 @@ public class ImagenService {
 
             return imagen;
 
+        } catch (MalformedURLException e) {
+            System.out.println("Error: La URL proporcionada es incorrecta: " + url);
+            // Aquí puedes lanzar una excepción o manejarla de otra manera según tu flujo de programa
+            throw new MyException("URL proporcionada incorrecta: " + url);
         } catch (Exception e) {
             // Log o mensaje informativo sobre el error, sin lanzar la excepción hacia arriba
             System.out.println("Advertencia: Error al crear el servicio: " + e.getMessage());
+            e.printStackTrace(); // Para obtener detalles del error en la consola
         }
-        return null;
+        return imagen;
+
     }
 
     private String obtenerNombreArchivoDesdeUrl(String url) {
