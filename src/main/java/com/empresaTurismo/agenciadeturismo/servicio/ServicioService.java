@@ -151,7 +151,7 @@ public class ServicioService {
 
         // Guardar las nuevas imágenes desde las URLs proporcionadas
         for (String url : url_imagenes) {
-            Imagen nuevaImagen = imagenService.guardarDesdeUrl(url);
+            Imagen nuevaImagen = imagenService.guardar(url,servicio);
             if (nuevaImagen != null) {
                 nuevaImagen.setServicio(servicio);
                 imagenes.add(nuevaImagen);
