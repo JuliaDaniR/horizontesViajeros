@@ -301,7 +301,7 @@
         </div>
         <footer id="contacto">
             <div class="footer">
-                <div class="contain-btn-comentarios">
+                <div class="contain-btn-comentarios" th:if="${session.usuariosession != null}">
                     <button class="btn-comentario" onclick="toggleContactForm()">
                         <span class="mr-2"><span class="fa fa-comments"></span></span>Comentarios 
                     </button>

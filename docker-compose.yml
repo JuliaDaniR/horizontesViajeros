@@ -25,6 +25,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: agencia_turismo
+      MONGO_URL: ${MONGO_URL}
     restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
@@ -43,6 +44,9 @@ services:
     depends_on:
       - agencia_bd
     restart: always
+    
 
 volumes:
     mysql-data:
+        
+       

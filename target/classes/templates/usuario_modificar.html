@@ -30,6 +30,11 @@
         <header class="contenedor-header-formulario">
             <nav class="navegacion">
 
+                <input type="checkbox" id="check"/>
+                <label for="check" class="checkbtn">
+                    <i class="fas fa-bars" style="font-weight: 900; margin-left: 1rem;"></i>
+                </label>
+
                 <span class="textColor">
                     <a th:href="@{/}" class="cursor-pointer" style="text-decoration: none">
                         Horizontes Viajeros
@@ -77,19 +82,19 @@
 
                 <div class="bodyForm-registrar" style="width: 60%; border: 2px double black">
                     <div class="container-modelo" xmlns:th="http://www.thymeleaf.org">
-    <div th:if="${error != null}" class="error">
-        <div class="card-body">  
-            <h4 class="card-title">Error 👎</h4>
-            <p class="card-text" th:text="${error}"></p>
-        </div>
-    </div>
-    <div th:if="${exito != null}" class="exito">
-        <div class="card-body">  
-            <h4 class="card-title">Exito 👍</h4>
-            <p class="card-text" th:text="${exito}"></p>
-        </div>
-    </div>
-</div>
+                        <div th:if="${error != null}" class="error">
+                            <div class="card-body">  
+                                <h4 class="card-title">Error 👎</h4>
+                                <p class="card-text" th:text="${error}"></p>
+                            </div>
+                        </div>
+                        <div th:if="${exito != null}" class="exito">
+                            <div class="card-body">  
+                                <h4 class="card-title">Exito 👍</h4>
+                                <p class="card-text" th:text="${exito}"></p>
+                            </div>
+                        </div>
+                    </div>
 
                     <h2 class="text-center mb-5">Perfil Usuario</h2>
 
