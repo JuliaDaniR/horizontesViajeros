@@ -10,6 +10,7 @@ services:
       DB_URL: jdbc:mysql://agencia_bd:3306/agencia_turismo?createDatabaseIfNotExist=true&serverTimezone=UTC
       DB_USER_NAME: root
       DB_PASSWORD: root
+      MONGO_URL: ${MONGO_URL}
     volumes:
       - ./src/main/resources/publico/uploads:/app/publico/uploads    
     restart: always
@@ -25,7 +26,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: agencia_turismo
-      MONGO_URL: ${MONGO_URL}
     restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
