@@ -251,6 +251,7 @@
     background:#d36913f1;
     color: black;
     margin-top: 12rem;
+    max-width: 640px;
     padding: 1rem;
     font-size: 1.5rem;
     border-radius: 20px;
